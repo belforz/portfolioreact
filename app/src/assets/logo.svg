@@ -1,0 +1,31 @@
+<svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+    <!-- Estrutura do óculos -->
+    <path d="M20,80 Q50,10 150,10 Q250,10 280,80 Q290,100 270,120 Q240,140 150,140 Q60,140 30,120 Q10,100 20,80" 
+          fill="black" stroke="black" stroke-width="3"/>
+
+    <!-- Lente esquerda -->
+    <rect x="40" y="50" width="100" height="60" rx="20" ry="20"
+          fill="url(#gradient)" stroke="black" stroke-width="2"/>
+    
+    <!-- Lente direita -->
+    <rect x="160" y="50" width="100" height="60" rx="20" ry="20"
+          fill="url(#gradient)" stroke="black" stroke-width="2"/>
+
+    <!-- Detalhes de ventilação -->
+    <circle cx="70" cy="40" r="3" fill="white" opacity="0.5"/>
+    <circle cx="230" cy="40" r="3" fill="white" opacity="0.5"/>
+    <circle cx="90" cy="35" r="3" fill="white" opacity="0.5"/>
+    <circle cx="210" cy="35" r="3" fill="white" opacity="0.5"/>
+
+    <!-- Definição do degradê das lentes -->
+    <defs>
+        <linearGradient id="gradient" x1="0%" y1="50%" x2="100%" y2="50%">
+            <stop offset="0%" stop-color="red"/>
+            <stop offset="20%" stop-color="orange"/>
+            <stop offset="40%" stop-color="yellow"/>
+            <stop offset="60%" stop-color="green"/>
+            <stop offset="80%" stop-color="blue"/>
+            <stop offset="100%" stop-color="purple"/>
+        </linearGradient>
+    </defs>
+</svg>
