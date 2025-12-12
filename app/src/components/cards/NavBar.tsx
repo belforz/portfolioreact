@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
-import { matchRoutes } from "react-router-dom";
 import { Bars2Icon, XMarkIcon } from "@heroicons/react/24/solid";
 
 interface NavBarProps {
   showTransition: boolean;
-  darkModeActive: boolean;
-  toggleDarkMode: () => void;
 }
 
 export function NavBar({
   showTransition,
-  darkModeActive,
-  toggleDarkMode,
 }: NavBarProps) {
   const [dropDownActive, setDropDownActive] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);

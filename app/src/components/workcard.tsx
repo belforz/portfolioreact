@@ -3,7 +3,7 @@ import { useOnIntersect } from "../hooks/onIntersect";
 import type { ExperienceProps } from "../types/sections";
 
 // Adjusted ExperienceProps to only destructure 'transitions' and fixed JSX closing tags
-export function Experience({content, transitions}: ExperienceProps) {
+export function Experience({ transitions }: ExperienceProps) {
     const experienceSection = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
     const intersectionVisible = useOnIntersect(experienceSection, transitions.showOnce, {
         threshold: transitions.thresholdOption,

@@ -11,7 +11,7 @@ export default tseslint.config([
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      tseslint.configs.recommended,
+      ...tseslint.configs.recommended,
       reactHooks.configs['recommended-latest'],
       reactRefresh.configs.vite,
     ],
@@ -19,11 +19,8 @@ export default tseslint.config([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
-    extends: [
-      'some-other-config-you-chose',
-      'plugin:prettier/recommended',
-    ],
-
+    rules: {
+      // Add any custom rules here
+    },
   },
-
 ])

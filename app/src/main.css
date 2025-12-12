@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&family=Source+Code+Pro');
+@import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+  --color-button: #4305ba;
+  --color-link: #4305ba;
+}
 
 #app {
     font-family: 'Source Code Pro', monospace; /* update if importing a different font than the one above */

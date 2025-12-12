@@ -1,12 +1,14 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Suspense } from 'react';
-import { RouteRenderer } from './routers/RouteRenderer'; // Corrigido
+import { RouteRenderer } from './routers/RouteRenderer';
 import routes from './routers';
 
 export default function App() {
   return (
     <Router>
-      <RouteRenderer routes={routes} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RouteRenderer routes={routes} />
+      </Suspense>
     </Router>
   );
 }

@@ -1,51 +1,128 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { LucideAnnoyed} from 'lucide-react';
 
+const SplashView = ({ onComplete}: { onComplete: () => void }) => {
+  const [progress, setProgress] = useState(0);
 
-export function SplashAnimation() {
-    const max = 20;
-    const character = "#";
-    const [hashtags, setHashtags] = useState<string[]>([]);
-    const [status, setStatus] = useState(false);
-    const [percentage, setPercentage] = useState(0);
-    const [message, setMessage] = useState("😶‍🌫️ Carregando...");
+  useEffect(() => {
+   
+    document.body.style.overflow = 'hidden';
 
-    useEffect(() => {
-        if (hashtags.length === 0) {
-            setHashtags([character]);
-            setStatus(false);
-            setMessage("😶‍🌫️ Carregando...");
-            const interval = setInterval(() => {
-                setHashtags(prev => {
-                    if (prev.length >= max) {
-                        setStatus(true);
-                        setMessage("🤯Sucesso!");
-                        clearInterval(interval);
-                        return prev;
-                    }
-                    return [...prev, character];
-                });
-            }, 65);
-            return () => clearInterval(interval);
+    const timer = setInterval(() => {
+      setProgress((old) => {
+        if (old >= 100) {
+          clearInterval(timer);
+          setTimeout(onComplete, 500);
+          return 100;
         }
-    }, [hashtags.length]);
+        
+        const increment = old > 80 ? 1 : 5; 
+        return Math.min(old + increment, 100);
+      });
+    }, 50);
 
-    useEffect(() => {
-        setPercentage(Math.floor((hashtags.length / max) * 100));
-    }, [hashtags.length, max]);
+    return () => {
+      clearInterval(timer);
+      // Libera o scroll quando desmontar
+      document.body.style.overflow = 'unset'; 
+    };
+  }, [onComplete]);
 
-    return (
-        <div className="flex items-center justify-center absolute z-50 bg-white text-black dark:bg-black dark:text-slate-300 text-center w-screen h-screen">
-            <div>
-                <div className="flex w-full space-x-2 items-center">
-                    <div className="flex w-full relative items-center justify-between py-4">
-                        <span>[</span>
-                        <p className="text-left w-[20ch]">{hashtags.join('')}</p> {/* Change width if changing max value */}
-                        <span className="ml-auto">]</span>
-                    </div>
-                    <p>{percentage}%</p>
-                </div>
-                <p className={`transition-all duration-200 ${status ? 'text-green-600' : 'text-black dark:text-slate-300'}`}>{message}</p>
-            </div>
-        </div>
-    );
-}
+  return (
+    <motion.div
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000000ff',
+        color:'#FACC15',
+      }}
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)', transition: { duration: 0.8 } }}
+    >
+      {/* Background Decorativo Animado */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.div 
+            animate={{ 
+                scale: [1, 1.2, 1],
+                rotate: [0, 90, 0] 
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[-25%] left-[-10%] w-[70vw] h-[70vw] bg-blue-600/20 rounded-full blur-[120px]" 
+        />
+        <motion.div 
+            animate={{ 
+                scale: [1, 1.5, 1],
+                x: [0, 100, 0] 
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-purple-600/20 rounded-full blur-[120px]" 
+        />
+      </div>
+
+      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white">
+        {/* Logo Container - Muito Maior */}
+        <motion.div
+          initial={{ scale: 0, rotate: -180 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ 
+            type: "spring", 
+            stiffness: 260, 
+            damping: 20, 
+            duration: 1.5 
+          }}
+          className="mb-12 p-8 bg-white/5 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl shadow-blue-500/20"
+        >
+          {/* Ícone bem grande */}
+          <LucideAnnoyed size={120} color="#FACC15" className="drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]" />
+        </motion.div>
+
+        {/* Texto Principal */}
+        {/* <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="text-5xl md:text-7xl font-black text-white tracking-tight mb-2"
+        >
+          NOME DO APP
+        </motion.h1> */}
+        
+        {/* Subtítulo */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mb-16 text-lg md:text-xl font-light tracking-widest uppercase text-yellow-200"
+        >
+          Bem-vindo ao Futuro :D
+        </motion.p>
+      </div>
+
+      {/* Barra de Progresso Larga e Elegante */}
+      <div className="mb-6 relative z-10 w-[80%] max-w-[400px] h-2 bg-slate-800 rounded-full overflow-hidden shadow-inner">
+        <motion.div 
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+          initial={{ width: "0%" }}
+          animate={{ width: `${progress}%` }}
+          transition={{ ease: "easeOut" }}
+        />
+      </div>
+      
+      {/* Texto de status (opcional) */}
+      <motion.div className="text-yellow-200 font-mono text-sm relative z-10">
+        {progress >= 100 ? "🤯Sucesso!" : `😶‍🌫️ Carregando... ${progress}%`}
+      </motion.div>
+
+    </motion.div>
+  );
+};
+
+export default SplashView;

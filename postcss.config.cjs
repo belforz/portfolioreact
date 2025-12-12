@@ -1,6 +1,9 @@
 module.exports = {
   plugins: {
-    tailwindcss: {},
+    '@tailwindcss/postcss': {
+      content: ["./app/index.html", "./app/src/**/*.{js,ts,jsx,tsx}"],
+      darkMode: 'class'
+    },
     autoprefixer: {},
   },
 };
