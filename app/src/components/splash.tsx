@@ -68,7 +68,7 @@ const SplashView = ({ onComplete}: { onComplete: () => void }) => {
         />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white">
+      <div className="relative z-10 flex flex-col items-center justify-center text-center text-white gap-8">
         {/* Logo Container - Muito Maior */}
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
@@ -79,12 +79,12 @@ const SplashView = ({ onComplete}: { onComplete: () => void }) => {
             damping: 20, 
             duration: 1.5 
           }}
-          className="mb-12 p-8 bg-white/5 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl shadow-blue-500/20"
+          className="p-8 bg-white/5 rounded-3xl backdrop-blur-xl border border-white/10 shadow-2xl shadow-blue-500/20"
         >
           {/* Ícone bem grande */}
           <LucideAnnoyed size={120} color="#FACC15" className="drop-shadow-[0_0_15px_rgba(96,165,250,0.5)]" />
         </motion.div>
-
+        <div className="p-2">
         {/* Texto Principal */}
         {/* <motion.h1
           initial={{ opacity: 0, y: 50 }}
@@ -120,6 +120,7 @@ const SplashView = ({ onComplete}: { onComplete: () => void }) => {
       <motion.div className="text-yellow-200 font-mono text-sm relative z-10">
         {progress >= 100 ? "🤯Sucesso!" : `😶‍🌫️ Carregando... ${progress}%`}
       </motion.div>
+      </div>
 
     </motion.div>
   );

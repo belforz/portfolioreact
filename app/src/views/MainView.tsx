@@ -6,6 +6,14 @@ import portfolio from '../portfolio';
 
 export default function MainView() {
   const [showSplash, setShowSplash] = useState(portfolio.splashScreen);
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle('dark', !darkMode);
+    setDarkMode(!darkMode);
+  }
+
+  
 
   useEffect(() => {
     if (showSplash) {
@@ -24,7 +32,7 @@ export default function MainView() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      <NavBar showTransition={true} />
+      <NavBar showTransition={true} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
       <main>
         <section id="landing-page" className="min-h-screen flex items-center justify-center">
