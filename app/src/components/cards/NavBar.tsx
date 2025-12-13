@@ -25,6 +25,12 @@ export function NavBar({
 
     setHideNavShadow(currScrollPosition <= 60);
 
+    if (dropDownActive) {
+      setShowNavbar(true);
+      setPrevScrollPosition(currScrollPosition);
+      return;
+    }
+
     if (
       currScrollPosition < 0 ||
       Math.abs(currScrollPosition - prevScrollPosition) < 60
@@ -34,7 +40,7 @@ export function NavBar({
     setShowNavbar(currScrollPosition < prevScrollPosition);
     setPrevScrollPosition(currScrollPosition);
     setDropDownActive(false);
-  }, [prevScrollPosition]);
+  }, [prevScrollPosition, dropDownActive]);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
