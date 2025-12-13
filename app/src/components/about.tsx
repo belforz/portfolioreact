@@ -1,33 +1,39 @@
 import { useState, useEffect, useRef } from "react";
 import type { AboutProps } from "../types/sections";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 
 export function About({content, transitions} : AboutProps) {
     const aboutSection = useRef<HTMLDivElement | null>(null)
     const [visible, setVisible] = useState<boolean>(false);
+    const { darkModeActive } = useDarkMode();
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if( entry.isIntersecting) {
-                    setVisible(true);
-                    if(transitions.showOnce) {
-                        observer.disconnect();
+        if (transitions.active) {
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    if( entry.isIntersecting) {
+                        setVisible(true);
+                        if(transitions.showOnce) {
+                            observer.disconnect();
+                        }
                     }
+                },
+                {
+                    threshold: transitions.thresholdOption
                 }
-            },
-            {
-                threshold: transitions.thresholdOption
+            );
+
+            if( aboutSection.current){
+                observer.observe(aboutSection.current);
             }
-        );
 
-        if( aboutSection.current){
-            observer.observe(aboutSection.current);
+            return () => {
+                observer.disconnect();
+            };
+        } else {
+            setVisible(true);
         }
-
-        return () => {
-            observer.disconnect();
-        };
     }, [transitions])
 
     return (
@@ -37,13 +43,13 @@ export function About({content, transitions} : AboutProps) {
           visible
             ? "translate-y-0 opacity-1 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
-        } transition-all motion-reduce:transition-none duration-500`}
+        } ${transitions.active ? "transition-all motion-reduce:transition-none duration-500" : ""}`}
       >
-        <h1 className="text-3xl font-bold pr-5">😎 Sobre</h1>
-        <div className="flex-grow border-t border-black dark:border-white border-1"></div>
+        <h1 className={`text-3xl font-bold pr-5 ${darkModeActive ? 'text-white' : 'text-black'}`}>😎 Sobre</h1>
+        <div className={`flex-grow border-t border-1 ${darkModeActive ? 'border-white' : 'border-black'}`}></div>
       </div>
       <div
-        className={`flex flex-col gap-y-4 xl:grid xl:grid-cols-2 xl:gap-x-5 xl:gap-y-0 mb-36 text-slate-500 dark:text-slate-300 transition-all motion-reduce:transition-none duration-500 delay-300 ${
+        className={`flex flex-col gap-y-4 xl:grid xl:grid-cols-2 xl:gap-x-5 xl:gap-y-0 mb-36 ${darkModeActive ? 'text-slate-300' : 'text-slate-500'} ${transitions.active ? "transition-all motion-reduce:transition-none duration-500 delay-300" : ""} ${
           visible
             ? "translate-y-0 opacity-1 blur-0"
             : "translate-y-4 opacity-0 blur-sm"

@@ -3,17 +3,11 @@ import SplashAnimation from '../components/splash';
 import { About } from '../components/about';
 import { NavBar } from '../components/cards/NavBar';
 import portfolio from '../portfolio';
+import { useDarkMode } from '../hooks/useDarkMode';
 
 export default function MainView() {
   const [showSplash, setShowSplash] = useState(portfolio.splashScreen);
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    document.documentElement.classList.toggle('dark', !darkMode);
-    setDarkMode(!darkMode);
-  }
-
-  
+  const { darkModeActive } = useDarkMode();
 
   useEffect(() => {
     if (showSplash) {
@@ -31,8 +25,8 @@ export default function MainView() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
-      <NavBar showTransition={true} darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+    <div className={`min-h-screen ${darkModeActive ? 'bg-black text-white' : 'bg-white text-black'}`}>
+      <NavBar showTransition={portfolio.transitions.active} />
 
       <main>
         <section id="landing-page" className="min-h-screen flex items-center justify-center">
@@ -40,10 +34,10 @@ export default function MainView() {
             <h1 className="text-6xl font-bold mb-4">
               {portfolio.greeting.intro} {portfolio.greeting.name}
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-400 mb-8">
+            <p className={`text-xl mb-8 ${darkModeActive ? 'text-gray-400' : 'text-gray-600'}`}>
               {portfolio.greeting.message}
             </p>
-            <p className="text-lg text-gray-500 dark:text-gray-500">
+            <p className={`text-lg ${darkModeActive ? 'text-gray-500' : 'text-gray-500'}`}>
               📍 {portfolio.greeting.basedLocation}
             </p>
           </div>
