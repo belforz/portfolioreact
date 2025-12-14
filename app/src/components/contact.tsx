@@ -20,7 +20,7 @@ export function Contact({ content, transitions }: ContactProps) {
     >
     <div className={`relative flex py-5 items-center ${
         visible
-            ? "translate-y-0 opacity-1 blur-0"
+            ? "translate-y-0 opacity-100 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
     }transition-all motion-reduce:transition-none duration-500`}>
     <div className="flex-grow border-t border-black dark:border-white border-1"></div>
@@ -30,7 +30,7 @@ export function Contact({ content, transitions }: ContactProps) {
     </div>
     <div className={`flex flex-col my-auto transition-all motion-reduce:transition-none duration-500 delay-300 ${
           visible
-            ? "translate-y-0 opacity-1 blur-0"
+            ? "translate-y-0 opacity-100 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
         }`}
     > 

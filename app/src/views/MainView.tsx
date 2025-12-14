@@ -8,6 +8,8 @@ import { Landing } from "../components/landing";
 import { Icon } from "../components/icon";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
+import { Contact } from "../components/contact";
+import { Experience } from "../components/workcard";
 
 export default function MainView() {
   const [showSplash, setShowSplash] = useState(portfolio.splashScreen);
@@ -88,8 +90,22 @@ export default function MainView() {
             <About
               content={{
                 autobiography: portfolio.about.autobiography,
-                photo: portfolio.about.photo1Link,
+                techStack: portfolio.about.techStack,
+                photo1Link: portfolio.about.photo1Link,
+                photo2Link: portfolio.about.photo2Link,
               }}
+              transitions={portfolio.transitions}
+            />
+            <Experience
+              content={{ experiences: portfolio.experiences }}
+              transitions={portfolio.transitions}
+            />
+            {/* <Skills
+              content={portfolio.skills}
+              transitions={portfolio.transitions}
+            /> */}
+            <Contact
+              content={portfolio.contact}
               transitions={portfolio.transitions}
             />
             </div>

@@ -41,7 +41,7 @@ export function About({content, transitions} : AboutProps) {
       <div
         className={`relative flex py-5 items-center ${
           visible
-            ? "translate-y-0 opacity-1 blur-0"
+            ? "translate-y-0 opacity-100 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
         } ${transitions.active ? "transition-all motion-reduce:transition-none duration-500" : ""}`}
       >
@@ -51,7 +51,7 @@ export function About({content, transitions} : AboutProps) {
       <div
         className={`flex flex-col gap-y-4 xl:grid xl:grid-cols-2 xl:gap-x-5 xl:gap-y-0 mb-36 ${darkModeActive ? 'text-slate-300' : 'text-slate-500'} ${transitions.active ? "transition-all motion-reduce:transition-none duration-500 delay-300" : ""} ${
           visible
-            ? "translate-y-0 opacity-1 blur-0"
+            ? "translate-y-0 opacity-100 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
         }`}
       >
@@ -68,16 +68,19 @@ export function About({content, transitions} : AboutProps) {
           <div className="grid grid-cols-2 gap-x-4">
             <div>
               <img
-                src={content.photo}
-                className="shadow-md"
+                src={content.photo1Link}
+                className="animate-glow shadow-md border rounded-full"
+                style={{'--glow-color1': '#32d92c80',
+                  '--glow-color2': '#66b327cc' 
+                 } as React.CSSProperties}
                 loading="lazy"
                 alt="Photo 1"
               />
             </div>
             <div>
               <img
-                src={content.photo}
-                className="shadow-md"
+                src={content.photo2Link}
+                className="animate-glow shadow-md border rounded-full"
                 loading="lazy"
                 alt="Photo 2"
               />

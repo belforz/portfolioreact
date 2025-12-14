@@ -49,13 +49,13 @@ export function NavBar({
   }, [onScroll]);
   return (
     <nav
-      className={`block w-full sticky top-0 z-10 transition-all duration-300 bg-${darkModeActive ? 'black' : 'white'} ${
+      className={`block w-full sticky top-0 z-10 transition-all duration-500 bg-${darkModeActive ? 'black' : 'white'} ${
         !showNavbar ? "translate-y-[-100%]" : "translate-y-0"
       } `}
       id="navbar"
     >
       <div
-        className={`flex items-start md:items-center md:flex-wrap md:justify-between xl:justify-center px-9 md:py-4 backdrop-blur-sm transition-shadow duration-300 ${darkModeActive ? 'bg-black' : 'bg-white'} ${hideNavShadow ? (darkModeActive ? "shadow-lg bg-black/80" : "shadow-lg") : ""}`}
+        className={`flex items-start md:items-center md:flex-wrap md:justify-between xl:justify-center px-9 md:py-4 backdrop-blur-sm transition-shadow duration-500 ${darkModeActive ? 'bg-black' : 'bg-white'} ${hideNavShadow ? (darkModeActive ? "shadow-lg bg-black/80" : "shadow-lg") : ""}`}
       >
         <a href="/#landing-page">
           {/* Logo */}
@@ -93,7 +93,7 @@ export function NavBar({
               { href: portfolio.greeting.resumeLink, label: "📄 Currículo" },
             ].map((link,index) => (
                     <li key={index}
-                        className={`transition-all motion-reduce:transition-none duration-500 delay-${50 * (index + 1)}ms ${showTransition ? 'translate-y-0 opacity-100': 'translate-y-4 opacity-0'} text-${darkModeActive ? 'white' : 'black'}`}
+                        className={`transition-all motion-reduce:transition-none duration-500 delay-[${50 * (index + 1)}ms] ${showTransition ? 'translate-y-0 opacity-100': 'translate-y-4 opacity-0'} text-${darkModeActive ? 'white' : 'black'}`}
                     >
                         <a className={`block cursor-pointer text-xl py-2 px-6 bg-transparent text-button-color transition ease-in-out hover:bg-button-color hover:text-white ${darkModeActive ? 'hover:text-white' : ''} focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300`}>
                             {link.label}

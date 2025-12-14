@@ -12,7 +12,9 @@ export type LandingProps = {
 export type AboutProps = {
     content: {
         autobiography: string [];
-        photo: string;
+        techStack: string [];
+        photo1Link?: string;
+        photo2Link?: string;
     };
     transitions: TransitionsProps;
 }
@@ -34,6 +36,13 @@ export type ContactProps = {
     
 }
 
+export type ExperienceSectionProps = {
+    content: {
+        experiences: ExperienceProps[];
+    };
+    transitions: TransitionsProps;
+}
+
 export type ExperienceProps = {
         position: string;
         company: {
@@ -42,6 +51,5 @@ export type ExperienceProps = {
         duration: string;
         bulletPoints: string[];
         hashtags: string[];
-    transitions: TransitionsProps;
 }
 
