@@ -4,6 +4,11 @@ export type TransitionsProps = {
     thresholdOption: number;
 }
 
+export type LandingProps = {
+    content: Record<string, unknown>;
+    transitions: TransitionsProps;
+}
+
 export type AboutProps = {
     content: {
         autobiography: string [];

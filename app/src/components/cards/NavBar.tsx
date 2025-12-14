@@ -49,7 +49,7 @@ export function NavBar({
   }, [onScroll]);
   return (
     <nav
-      className={`block w-full sticky top-0 z-10 transition-all duration-300 ${
+      className={`block w-full sticky top-0 z-10 transition-all duration-300 bg-${darkModeActive ? 'black' : 'white'} ${
         !showNavbar ? "translate-y-[-100%]" : "translate-y-0"
       } `}
       id="navbar"
@@ -76,9 +76,9 @@ export function NavBar({
           {dropDownActive ?
           
           (
-            <XMarkIcon className={`h-10 w-10 ${darkModeActive ? 'fill-slate-300' : 'fill-gray-500'}`} />
+            <XMarkIcon className={` cursor-pointer h-10 w-10 ${darkModeActive ? 'fill-slate-300' : 'fill-gray-500'}`} />
           ) : (
-            <Bars2Icon className={`h-10 w-10 ${darkModeActive ? 'fill-slate-300' : 'fill-gray-500'}`} />
+            <Bars2Icon className={`cursor-pointer h-10 w-10 ${darkModeActive ? 'fill-slate-300' : 'fill-gray-500'}`} />
           )}
         </button>
 
@@ -93,9 +93,9 @@ export function NavBar({
               { href: portfolio.greeting.resumeLink, label: "📄 Currículo" },
             ].map((link,index) => (
                     <li key={index}
-                        className={`transition-all motion-reduce:transition-none duration-500 delay-${50 * (index + 1)}ms ${showTransition ? 'translate-y-0 opacity-100': 'translate-y-4 opacity-0'}`}
+                        className={`transition-all motion-reduce:transition-none duration-500 delay-${50 * (index + 1)}ms ${showTransition ? 'translate-y-0 opacity-100': 'translate-y-4 opacity-0'} text-${darkModeActive ? 'white' : 'black'}`}
                     >
-                        <a className={`block cursor-pointer text-xl py-2 px-6 bg-transparent text-button-color transition ease-in-out hover:bg-button-color hover:text-white ${darkModeActive ? 'hover:text-slate-300' : ''} focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300`}>
+                        <a className={`block cursor-pointer text-xl py-2 px-6 bg-transparent text-button-color transition ease-in-out hover:bg-button-color hover:text-white ${darkModeActive ? 'hover:text-white' : ''} focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300`}>
                             {link.label}
                         </a>
                        
@@ -107,9 +107,15 @@ export function NavBar({
                     >
                         <button onClick={toggleDarkMode} className={`block ${dropDownActive ? 'px-6' : ''}`}>
                             {darkModeActive ? (
-                                <Figure icon={MoonIcon} size={dropDownActive ? 30 : 50} className="cursor-pointer text-slate-300 hover:text-yellow-400" />
+                                <div className="flex items-center space-x-2">
+                                    <Figure icon={MoonIcon} size={dropDownActive ? 30 : 50} className="cursor-pointer text-white hover:text-yellow-400" />
+                                    <span className="p-2 cursor-pointer text-white hover:text-yellow-400">Modo Escuro</span>
+                                </div>
                             ) : (
-                                <Figure icon={SunIcon} size={dropDownActive ? 30 : 50} className="cursor-pointer text-slate-400 hover:text-yellow-400" />
+                                <div className="flex items-center space-x-2">
+                                    <Figure icon={SunIcon} size={dropDownActive ? 30 : 50} className="cursor-pointer text-black hover:text-yellow-400" />
+                                    <span className="p-2 cursor-pointer text-black hover:text-yellow-400">Modo Claro</span>
+                                </div>
                             )}
                         </button>
                     </li>
