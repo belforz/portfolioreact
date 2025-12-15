@@ -1,13 +1,16 @@
 import type { ExperienceProps } from "../../types/sections";
+import { forwardRef } from "react";
 
 interface ExperienceCardProps {
     experience: ExperienceProps
+    className?: string
+    style?: React.CSSProperties
 }
 
 
-const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
+const ExperienceCard = forwardRef<HTMLDivElement, ExperienceCardProps>(({ experience, className = "", style }, ref) => {
     return (
-        <div className="flex flex-col flex-1 rounded-md bg-white shadow-md hover:shadow-lg hover:-translate-y-1 motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-md dark:bg-slate-800 text-left p-4 transition-all duration-300">
+        <div ref={ref} className={`flex flex-col flex-1 min-h-80 rounded-md shadow-md hover:shadow-lg hover:-translate-y-3 motion-reduce:hover:translate-y-0 motion-reduce:hover:shadow-md text-left p-4 transition-all duration-300 ${className}`} style={style}>
             <h3 className="text-xl font-extrabold"> {experience.position} @ {experience.company.name} </h3>
             <p className="italic">{experience.duration}</p>
             <ul className="list-['\1F449'] pl-6 pt-4 text-slate-500 dark:text-slate-300">
@@ -26,7 +29,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
             
         </div>
     )
-}
+});
 
 export default ExperienceCard;
 
