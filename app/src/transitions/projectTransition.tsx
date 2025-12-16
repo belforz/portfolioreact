@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import SplashView from '../components/splash'; // Ajuste o caminho
+import SplashView from '../components/splash'; 
 
 function App() {
   const [loading, setLoading] = useState(true);

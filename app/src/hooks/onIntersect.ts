@@ -13,6 +13,7 @@ export const useOnIntersect = (
   options: IntersectionObserverInit = { threshold: 0.15 }
 ): boolean => {
   const [visible, setVisible] = useState(false);
+  const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
   useEffect(() => {
     const element = elementToWatch.current;
@@ -21,11 +22,14 @@ export const useOnIntersect = (
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setVisible(true);
+        setHasBeenVisible(true);
         if (once) {
           observer.unobserve(entry.target);
         }
       } else {
-        setVisible(false);
+        if (!hasBeenVisible || !once) {
+          setVisible(false);
+        }
       }
     }, options);
 

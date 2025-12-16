@@ -95,7 +95,7 @@ export function NavBar({
                     <li key={index}
                         className={`transition-all motion-reduce:transition-none duration-500 delay-[${50 * (index + 1)}ms] ${showTransition ? 'translate-y-0 opacity-100': 'translate-y-4 opacity-0'} text-${darkModeActive ? 'white' : 'black'}`}
                     >
-                        <a className={`block cursor-pointer text-xl py-2 px-6 bg-transparent text-button-color transition ease-in-out hover:bg-button-color hover:text-white ${darkModeActive ? 'hover:text-white' : ''} focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300`}>
+                        <a className={`block cursor-pointer text-xl py-2 px-6 bg-transparent text-button-color transition ease-in-out hover:bg-button-color hover:text-sky-400 focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300`}>
                             {link.label}
                         </a>
                        

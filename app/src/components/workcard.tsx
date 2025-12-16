@@ -3,11 +3,14 @@ import { useRef, useEffect, useState } from "react";
 
 import ExperienceCard from "./cards/ExperienceCard";
 import { useOnIntersect } from "../hooks/onIntersect";
+import useDarkMode from "../hooks/useDarkMode";
 
 
 export function Experience({ transitions, content }: ExperienceSectionProps) {
     const experienceSection = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
     const refs = useRef<(HTMLDivElement | null)[]>([]);
+    const darkMode = useDarkMode();
+    const { darkModeActive } = darkMode;
     const [maxHeight, setMaxHeight] = useState(0);
     const intersectionVisible = useOnIntersect(experienceSection, transitions.showOnce, {
         threshold: transitions.thresholdOption,
@@ -37,8 +40,8 @@ export function Experience({ transitions, content }: ExperienceSectionProps) {
                         : "translate-y-4 opacity-0 blur-sm"
                 } transition-all motion-reduce:transition-none duration-500`}
             >
-                <h1 className="text-3xl font-bold pr-5 ">🛡️ Experiencias</h1>
-                <div className="flex-grow border-t border-black dark:border-white border-1"></div>
+                <h1 className={`text-3xl font-bold pr-5 ${darkModeActive ? 'text-white' : 'text-black'}`}>🛡️ Experiencias</h1>
+        <div className={`flex-grow border-t border-1 ${darkModeActive ? 'border-white' : 'border-black'}`}></div>
             </div>
             <div
                 className={`flex flex-col space-y-4 mb-4 lg:grid lg:grid-cols-2 lg:gap-x-8 lg:gap-y-4 lg:space-y-2 mb-36 transition-all motion-reduce:transition-none duration-500 delay-300 ${
@@ -48,7 +51,7 @@ export function Experience({ transitions, content }: ExperienceSectionProps) {
                 }`}
             >
                { content.experiences.map((experience: ExperienceProps, index: number) => (
-                    <ExperienceCard key={index} experience={experience} className={`${index % 2 === 0 ? 'bg-white !dark:bg-slate-900' : 'bg-gray-100 !dark:bg-slate-600'} ${index % 2 !== 0 ? 'lg:mb-4' : ''}`} ref={(el) => { refs.current[index] = el; }} style={{ minHeight: maxHeight || undefined }} />
+                    <ExperienceCard key={index} experience={experience} className={`${index % 2 === 0 ? (darkModeActive ? 'bg-slate-900' : 'bg-white') : (darkModeActive ? 'bg-slate-900' : 'bg-gray-100')} ${index % 2 !== 0 ? 'lg:mb-4' : ''}`} ref={(el) => { refs.current[index] = el; }} style={{ minHeight: maxHeight || undefined }} />
                ))}
             </div>
         </section>
