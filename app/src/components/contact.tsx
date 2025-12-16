@@ -1,9 +1,11 @@
 import { useRef } from "react";
 import { useOnIntersect } from "../hooks/onIntersect";
 import type { ContactProps } from "../types/sections";
+import useDarkMode from "../hooks/useDarkMode";
 
 export function Contact({ content, transitions }: ContactProps) {
   const contactSection = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
+  const { darkModeActive } = useDarkMode()
   const intersectionVisible = useOnIntersect(contactSection, transitions.showOnce, {
     threshold: transitions.thresholdOption,
   });
@@ -17,15 +19,17 @@ export function Contact({ content, transitions }: ContactProps) {
     <section
     ref={contactSection}
     id="contact-section"
+    className="min-h-screen w-full flex flex-col"
     >
     <div className={`relative flex py-5 items-center ${
         visible
             ? "translate-y-0 opacity-100 blur-0"
             : "translate-y-4 opacity-0 blur-sm"
     }transition-all motion-reduce:transition-none duration-500`}>
-    <div className="flex-grow border-t border-black dark:border-white border-1"></div>
-    <h1 className="text-3xl font-bold px-5">📭Contato</h1>
-    <div className="flex-grow border-t border-black dark:border-white border-1"></div>
+      
+    <div className={`flex-grow border-t  ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
+    <h1 className={`text-3xl font-bold px-5 text-black ${darkModeActive ? 'text-white' : 'text-black'}`}>📭Contato</h1>
+    <div className={`flex-grow border-t ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
 
     </div>
     <div className={`flex flex-col my-auto transition-all motion-reduce:transition-none duration-500 delay-300 ${
@@ -43,11 +47,11 @@ export function Contact({ content, transitions }: ContactProps) {
           />
         ) : (
           <div className="space-y-8 mx-auto text-center">
-            <h1 className="text-3xl font-extrabold">Vamos nos falando...</h1>
+            <h1 className="text-3xl !font-extrabold mb-4 text-center dark:text-white">Vamos nos falando...</h1>
             {content.externalLink?.note.map((msg, idx) => (
-              <p key={idx} className="text-slate-500 dark:text-slate-300">{msg}<br /></p>
+              <p key={idx} className="text-slate-500 p-8 dark:text-slate-300">{msg}<br /></p>
             ))}
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-5 sm:space-x-5">
+            <div className="flex flex-col gap-4 sm:flex-row items-center justify-center space-y-5 sm:space-x-5">
               {content.externalLink?.link.email ? (
                 <>
                   <a href={`mailto:${content.externalLink.link.email}`}>
@@ -55,7 +59,7 @@ export function Contact({ content, transitions }: ContactProps) {
                       Mande-me um email
                     </button>
                   </a>
-                  <p className="text-sm mt-8 sm:mt-0 text-slate-500 dark:text-slate-300">
+                  <p className="text-sm mt-8 sm:mt-0 text-slate-300 dark:text-slate-500">
                     {content.responseTimeMessage || "Normalmente respondo em 24 horas."}
                   </p>
                 </>
