@@ -10,6 +10,7 @@ import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { Contact } from "../components/contact";
 import { Experience } from "../components/workcard";
+import { Project } from "../components/project";
 
 export default function MainView() {
   const [showSplash, setShowSplash] = useState(portfolio.splashScreen);
@@ -104,6 +105,11 @@ export default function MainView() {
               content={portfolio.skills}
               transitions={portfolio.transitions}
             /> */}
+
+            <Project 
+              content={{ works: portfolio.works}}
+              transitions={portfolio.transitions}
+            />
             <Contact
               content={portfolio.contact}
               transitions={portfolio.transitions}

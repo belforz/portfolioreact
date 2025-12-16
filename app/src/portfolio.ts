@@ -248,6 +248,42 @@ const experiences = [
 
 // --- 💻 Work Section ---
 const works = [
+     {
+        projectName: "Loja de Vinis",
+        yearCompleted: "2025",
+        "description": "Loja de Vinis é uma plataforma de e-commerce desenvolvida para a venda de discos de vinil. Com um design minimalista e responsivo, a loja oferece uma experiência de compra intuitiva e agradável.",
+        techStack: "React, Typescript, Java, MongoDB",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/v-disk-interface"
+            },{
+                label: "Website",
+                type: "external",
+                url: "https://v-disk-interface.vercel.app/"
+            }
+        ],
+        imageLink: "images/v-disk.png",
+        alignLeft: true,
+        isImportant: false
+    },
+    {
+        projectName: "Mini Photshop em C",
+        yearCompleted: "2025",
+        "description": "Mini Photshop é um editor de imagens leve e minimalista, desenvolvido em C. Ele permite que os usuários realizem edições básicas em suas fotos, como recorte, redimensionamento e ajuste de cores.",
+        techStack: "C, GTK",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/mini-photoshop-app"
+            }
+        ],
+        imageLink: "images/photoshopC.png",
+        alignLeft: false,
+        isImportant: false
+    },
     {
         projectName: "Mini Leandro",
         yearCompleted: "2025",
@@ -391,7 +427,7 @@ const works = [
         imageLink: "images/BomVizinho.png",
         alignLeft: false,
         isImportant: true
-    }
+    },
 ];
 
 

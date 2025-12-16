@@ -36,6 +36,31 @@ export type ContactProps = {
     
 }
 
+export type ProjectSectionProps = {
+    content: {
+        works: WorksProps [];
+    };
+    transitions: TransitionsProps;
+}
+
+export type LinksProps = {
+    label: string;
+    type: string;
+    url: string;
+}
+
+export type WorksProps = {
+    projectName: string;
+    yearCompleted: string;
+    description: string;
+    techStack: string;
+    links: LinksProps[];
+    imageLink: string;
+    alignLeft: boolean;
+    isImportant: boolean;
+    archiveLink?: string;
+}
+
 export type ExperienceSectionProps = {
     content: {
         experiences: ExperienceProps[];
