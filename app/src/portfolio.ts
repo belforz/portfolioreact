@@ -248,11 +248,59 @@ const experiences = [
 
 // --- 💻 Work Section ---
 const works = [
+    {
+        projectName: "NLP Classification Module",
+        yearCompleted: "2025",
+        description: "Modulo avançado de NLP, incluindo analise de tendências, extração de entidades nomeadas. Além de classificação de texto e pontuanção por matrizes de risco.",
+        techStack: "#Sentence Transformers, #Python, #SpaCy, #NLTK, #HuggingFace",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/classification-nlp"
+            },
+        ],
+        imageLink: "images/NLP.jpg",
+        alignLeft: false,
+        isImportant: false
+    },
+    {
+        projectName: "NLP Semantics Module",
+        yearCompleted: "2025",
+        description: "Pré pesquisa de uma futura iniciação cientifica, envolvendo semântica textual com NLP, utilizando modelos de linguagem avançados para análise de similaridade semântica e agrupamento de textos",
+        techStack: "#Sentence Transformers, #Python, #Numpy, #HuggingFace, #Cosine Similarity",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/classification-nlp"
+            },
+        ],
+        imageLink: "images/image2.png",
+        alignLeft: true,
+        isImportant: false
+    },
+     {
+        projectName: "Loja de Adoção de Pets",
+        yearCompleted: "2025",
+        description: "Loja de Adoção de Pets é uma plataforma para facilitar a adoção de animais de estimação, conectando abrigos e adotantes de forma simples e eficiente.",
+        techStack: "#Java, #Python, #TKInter, #GUISWING, #MySQL",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/doacao_animal_app"
+            },
+        ],
+        imageLink: "images/pets.jpg",
+        alignLeft: false,
+        isImportant: false
+    },
      {
         projectName: "Loja de Vinis",
         yearCompleted: "2025",
         "description": "Loja de Vinis é uma plataforma de e-commerce desenvolvida para a venda de discos de vinil. Com um design minimalista e responsivo, a loja oferece uma experiência de compra intuitiva e agradável.",
-        techStack: "React, Typescript, Java, MongoDB",
+        techStack: "#React, #Typescript, #Java, #MongoDB",
         links: [
             {
                 label: "GitHub",
@@ -272,7 +320,7 @@ const works = [
         projectName: "Mini Photshop em C",
         yearCompleted: "2025",
         "description": "Mini Photshop é um editor de imagens leve e minimalista, desenvolvido em C. Ele permite que os usuários realizem edições básicas em suas fotos, como recorte, redimensionamento e ajuste de cores.",
-        techStack: "C, GTK",
+        techStack: "#C, #GTK",
         links: [
             {
                 label: "GitHub",
@@ -288,7 +336,7 @@ const works = [
         projectName: "Mini Leandro",
         yearCompleted: "2025",
         "description": "🤖 Mini Leandro é um agente inteligente desenvolvido para interagir de forma natural e dinâmica, utilizando IA generativa. Com um design minimalista e responsivo, ele combina Vue.js e Python para oferecer conversas fluidas e personalizadas. Ele evoluiu para atender intenções através de NLP e agir de maneira independente.",
-        techStack: "Generative AI, Python, Vue.js, Redis, Mongo",
+        techStack: "#Generative AI, #Python, #Vue.js, #Redis, #Mongo",
         links: [
             {
                 label: "GitHub",
@@ -304,7 +352,7 @@ const works = [
         projectName: "MusicSom",
         yearCompleted: "2025",
         "description": "🎧 Musicsom é um sistema inteligente de recomendação musical criado para estimular descobertas fora da zona de conforto. Focado nas características técnicas e sensoriais dos álbuns, ele permite que o usuário escolha o que deseja ouvir com base em instrumentos, BPM, vocais e atmosfera — sem depender de gênero ou artista. o Musicsom é o seu curador musical técnico e personalizado. 🎶",
-        techStack: "SQL, BrModel",
+        techStack: "#SQL, #BrModel",
         links: [
             {
                 label: "GitHub",
@@ -321,7 +369,7 @@ const works = [
         projectName: "Obranet",
         yearCompleted: "2024",
         description: "🚧 Gestor de Obras: Projeto acadêmico que automatiza a gestão de clientes, funcionários e obras no Excel. Com cadastro, edição, pesquisa e exclusão, une teoria e prática para simplificar processos.",
-        techStack: "Excel, Visual Basic Application (VBA)",
+        techStack: "#Excel, #Visual Basic Application (VBA)",
         links: [
             {
                 label: "GitHub",
@@ -337,7 +385,7 @@ const works = [
         projectName: "Fotografias",
         yearCompleted: "2024",
         description: "Um olhar fotogênico e criativo sobre o mundo, este projeto visa atender a um almejo pessoal que inspira os meus conhecimentos técnicos dentro do mundo da Tecnologia",
-        techStack: "JavaScript, Vue.js, TailwindCSS",
+        techStack: "#JavaScript, #Vue.js, #TailwindCSS",
         links: [
             {
                 label: "GitHub",
@@ -358,7 +406,7 @@ const works = [
         projectName: "R&M Administração",
         yearCompleted: "2024",
         description: "Com seus aspectos minimalistas, através de tecnologias como PHP, JS e CSS, uma atualização do site da empresa envolvendo práticas de UX design",
-        techStack: "JavaScript, CSS, HTML & PHP",
+        techStack: "#JavaScript, #CSS, #HTML & #PHP",
         links: [
             {
                 label: "GitHub",
@@ -379,7 +427,7 @@ const works = [
         projectName: "BaixaCNPJ",
         yearCompleted: "2024",
         description: "Site de venda para a finalização de processos de CNPJ, diminuindo etapas com a utilização de UX design para atração de público.",
-        techStack: "JavaScript, CSS, HTML & PHP",
+        techStack: "#JavaScript, #CSS, #HTML & #PHP",
         links: [
             {
                 label: "GitHub",
@@ -395,7 +443,7 @@ const works = [
         projectName: "LimpaNome",
         yearCompleted: "2024",
         description: "Uma interface mais atraente para a limpeza de nome, abreviando processos.",
-        techStack: "PHP, HTML, CSS, JS",
+        techStack: "#PHP, #HTML, #CSS, #JS",
         links: [
             {
                 label: "GitHub",
@@ -411,7 +459,7 @@ const works = [
         projectName: "Bom Vizinho",
         yearCompleted: "2023",
         description: "Um web aplicativo de serviços voluntários para idosos.",
-        techStack: "HTML, CSS, JS, Java, PostgreSQL, Vercel, SwaggerUi",
+        techStack: "#HTML, #CSS, #JS, #Java, #PostgreSQL, #Vercel, #SwaggerUi",
         links: [
             {
                 label: "GitHub",

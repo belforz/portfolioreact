@@ -12,7 +12,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, className = "", style }: ProjectCardProps) {
   const [showProject, setShowProject] = useState(false);
-  let getImageUrl = (path: any) => {
+  const getImageUrl = (path: string) => {
     return `/assets/${path.replace('images/', '')}`
   }
   const isProjectLeftAligned = project.alignLeft;
@@ -28,12 +28,12 @@ export function ProjectCard({ project, className = "", style }: ProjectCardProps
               />
           </div>
         )}
-        <div className={`flex flex-col space-y-4 ${project.alignLeft ? 'text-left' : 'lg:text-right'}`}>
+        <div className={`flex flex-col gap-8 ${project.alignLeft ? 'text-left' : 'lg:text-right'}`}>
             <p>{project.yearCompleted}</p>
             <h3 className="text-xl font-extrabold pb-2">{project.projectName}</h3>
             <p className="text-slate-500 dark:text-slate-300">{project.description}</p>
             <p className="text-slate-600">{project.techStack}</p>
-            <div className={`flex space-x-6 items-center text-slate-400 ${!project.alignLeft ? 'lg:justify-end' : ''}`}>
+            <div className={`flex !space-x-2 text-slate-400 ${!project.alignLeft ? 'lg:justify-end' : ''}`}>
                 {project.links.map((link, index) => (
                   <a key={index} href={link.url} className="flex items-center space-x-2 hover:text-link-color focus:text-link-color active:text-link-color" target="_blank">
                       {link.type === 'git' && (

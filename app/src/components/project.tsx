@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useOnIntersect } from "../hooks/onIntersect";
 import type { ProjectSectionProps } from "../types/sections";
 import { ProjectCard } from "./cards/projectcard";
+import useDarkMode from "../hooks/useDarkMode";
 
 export function Project({ content, transitions }: ProjectSectionProps) {
     const workSection = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
@@ -16,15 +17,16 @@ export function Project({ content, transitions }: ProjectSectionProps) {
     const projInitial = content.works.filter((_, index) => index < 3);
     const showPreview = content.works.length > 3;
     const [showMore, setShowMore] =  useState(false);
+    const { darkModeActive } = useDarkMode();
 
     return (
     <section className="min-h-screen w-full" ref={workSection} id="work-section">
         <div className={`relative flex py-5 items-center ${visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-sm'} transition-all motion-reduce:transition-none duration-500`}>
             <h1 className="text-3xl font-bold pr-2 sm:pr-5">💻 Projetos</h1>
-            <div className="flex-grow border-t border-black dark:border-white border-1"></div>
-            <a href={content.works[0].archiveLink} className="pl-2 sm:pl-5 hover:text-link-color text-right text-sm">Histórico</a>
+            <div className={`flex-grow border-t ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
+            <a href="https://github.com/belforz?tab=repositories" className="pl-2 sm:pl-5 hover:text-link-color text-right text-sm">Histórico</a>
         </div>
-        <div className={`flex flex-col gap-8 space-y-12 mb-36 transition-all motion-reduce:transition-none duration-500 delay-300 ${visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-sm'}`}>
+        <div className={`flex flex-col gap-8 transition-all motion-reduce:transition-none duration-500 delay-300 ${visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-sm'}`}>
             {(showMore ? content.works : projInitial).map((project, index) => (
                 <ProjectCard key={index} project={project} />
             ))}

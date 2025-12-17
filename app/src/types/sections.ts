@@ -61,6 +61,8 @@ export type WorksProps = {
     archiveLink?: string;
 }
 
+
+
 export type ExperienceSectionProps = {
     content: {
         experiences: ExperienceProps[];
