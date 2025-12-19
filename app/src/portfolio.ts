@@ -70,36 +70,113 @@ const iconsImages = {
 
 // --💪🤝--- Skills Section ---
 
+const skills = [{
+        svgLink: "assets/svg/javascript-icon.svg",
+        label: "JavaScript",
+    },
+    {
+        svgLink: "assets/svg/python-icon.svg",
+        label: "Python",
+    },
+    {
+        svgLink: "assets/svg/w3_html5-icon.svg",
+        label: "HTML",
+    },
+    {
+        svgLink: "assets/svg/w3_css-icon.svg",
+        label: "CSS",
+    },
+    {
+        svgLink: "assets/react.svg",
+        label: "React",
+    },
+    {
+        svgLink: "assets/svg/tailwindcss-icon.svg",
+        label: "Tailwind CSS",
+    },
+    {
+        svgLink: "assets/svg/sdk-react-native.svg",
+        label: "React Native",
+    },
+    {
+        svgLink: "assets/svg/vuejs-icon.svg",
+        label: "Vue.js",
+    },
+        {
+        svgLink: "assets/svg/nodejs-icon.svg",
+        label: "Node.js",
+    },
+    {
+        svgLink: "assets/svg/php-icon.svg",
+        label: "PHP",
+    },
+    {
+        svgLink: "assets/svg/java-icon.svg",
+        label: "Java",
+    },
+    {
+        svgLink: "assets/svg/mysql-icon.svg",
+        label: "SQL Language",
+    },
+    {
+        svgLink: "no-asset",
+        label: "No-SQL",
+    },
+    {
+        svgLink: "assets/svg/nlp.png",
+        label: "Natural Language Processing"
+    },
+    {
+        svgLink: "assets/svg/nlp_um.png",
+        label: "Advanced NLP in Semantics and Text Classification"
+    },
+    {
+        svgLink: "assets/svg/pytorch.svg",
+        label: "PyTorch",
+    },
+    {
+        svgLink: "assets/svg/tensorflow.svg",
+        label: "TensorFlow"
+    },
+    {
+        svgLink: "assets/svg/opencv.png",
+        label: "OpenCV",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Ingles",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Espanhol",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Sociabilidade",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Comunicação",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Trabalho em Grupo",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Inovação",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Curiosidade",
+    },
+    {
+        svgLink: "no-asset",
+        label: "Proatividade",
+    }
+]
+   
 
-const skills = {
-    hardSkills: [
-        "JavaScript",
-        "HTML",
-        "CSS",
-        "Python",
-        "React",
-        "ReactNative",
-        "Vue.js",
-        "Node,js",
-        "PHP",
-        "Java",
-        "Noções de C & C++ & Ruby",
-        "Springboot",
-        "IntelliJeA",
-        "Android Studio",
-        "SQL Language",
-        "No-SQL",
-        "Ingles",
-        "Espanhol"
-    ], softSkills: [
-        "Sociabilidade",
-        "Comunicação",
-        "Trabalho em Grupo",
-        "Inovação",
-        "Curiosidade",
-        "Proatividade"
-    ]
-}
 
 // --- 🛡️ Experience Section ---
 const experiences = [

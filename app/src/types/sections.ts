@@ -80,3 +80,22 @@ export type ExperienceProps = {
         hashtags: string[];
 }
 
+export type SkillItemProps = {
+    svgLink: string;
+    label: string;
+}
+
+export type SkillsProps = {
+    content: {
+        skills: SkillItemProps[];
+    }
+}
+
+export type SkillsSectionProps = {
+    content: {
+        skills: SkillItemProps[];
+        
+    };
+    transitions: TransitionsProps;
+}
+
