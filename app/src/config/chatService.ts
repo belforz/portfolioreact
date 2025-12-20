@@ -1,8 +1,6 @@
 import { chatApi } from "../../../api/service/axios-config";
 import type { Message } from "../types/request";
 
-
-
 export const checkChatHealth = async() =>{
     try {
     const response = await chatApi.get('/chatbot/');
@@ -14,7 +12,7 @@ export const checkChatHealth = async() =>{
 }
 
 export const sendChatMessage = async(message: Message) => {
-    const response = await chatApi.post('/chat',
+    const response = await chatApi.post('/chatbot/chat',
         {
             message: message.message
         }

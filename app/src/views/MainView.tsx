@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import SplashAnimation from "../components/splash";
 import { About } from "../components/about";
 import { NavBar } from "../components/cards/NavBar";
@@ -12,10 +12,12 @@ import { Contact } from "../components/contact";
 import { Experience } from "../components/workcard";
 import { Project } from "../components/project";
 import { Skills } from "../components/skills";
+import { ChatMiniLeandro } from "../components/chatbot";
 
 export default function MainView() {
   const [showSplash, setShowSplash] = useState(portfolio.splashScreen);
   const { darkModeActive } = useDarkMode();
+  const [popUpVisible, setPopUpVisible] = useState(true);
 
   useEffect(() => {
     if (showSplash) {
@@ -115,6 +117,10 @@ export default function MainView() {
               content={portfolio.contact}
               transitions={portfolio.transitions}
             />
+            <ChatMiniLeandro
+        visible={popUpVisible}
+        onUpdateVisible={setPopUpVisible}
+      />
             </div>
           </div>
         </div>

@@ -1,99 +1,109 @@
-import { useRef, useEffect } from "react";
-import { sendChatMessage } from "../config/chatService";
+import { useState, useCallback, useEffect } from 'react';
+import { sendChatMessage } from './useAxios';
 
-const STORAGE_KEY = "mini-leandro-chat-history";
+const STORAGE_KEY = 'mini-leandro-chat-history';
+const LAST_MESSAGE_DATE_KEY = 'mini-leandro-last-message-date';
 
-type InterectionMessage = {
+interface Message {
   fromUser: boolean;
   animatedText: string;
 }
 
-export function useChat() {
-  const messages = useRef<InterectionMessage[]>([]);
-  const loading = useRef(false);
+function getToday(): string {
+  return new Date().toISOString().split('T')[0];
+}
 
+function isFirstMessageOfDay(): boolean {
+  const lastDate = localStorage.getItem(LAST_MESSAGE_DATE_KEY);
+  const today = getToday();
+  return lastDate !== today;
+}
+
+export function useChatStream() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [isFirstOfDay, setIsFirstOfDay] = useState(false);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved)
-      { const parsed = JSON.parse(saved);
-        messages.current = parsed.map((msg: InterectionMessage) =>{
-          return {
-            fromUser: msg.fromUser,
-            animatedText: msg.animatedText || "",
-          }
-
-        })
-
-      }} catch {
-        console.error("[useChat] Failed to load chat history from localStorage")
-        messages.current = [];
-
+      if (saved) {
+        setMessages(JSON.parse(saved));
       }
-  }, [])
-
-  useEffect(() => {
-    const persistable = messages.current.map((msg: InterectionMessage) => ({
-      fromUser: msg.fromUser,
-      animatedText: msg.animatedText,
-    }))
-
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
-
-
+      // Verificar se é primeira mensagem do dia
+      setIsFirstOfDay(isFirstMessageOfDay());
+    } catch (error) {
+      console.warn('[useChatStream] Falha ao carregar histórico:', error);
+    }
   }, []);
 
-  const sendMessage = async (userMessage: string) => {
+  useEffect(() => {
+    const persistable = messages.map((msg) => ({
+      fromUser: msg.fromUser,
+      animatedText: msg.animatedText,
+    }));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(persistable));
+  }, [messages]);
+
+  const sendMessage = useCallback(async (userMessage: string) => {
     const text = userMessage.trim();
-    if (!text) {
-      console.warn("[useChat] Mensagem vazia ignorada");
-      return;
-    }
+    if (!text) return;
 
-    console.log("[useChat] Enviando mensagem do usuário:", text);
+    const isFirstMsg = isFirstMessageOfDay();
+    setIsFirstOfDay(isFirstMsg);
 
-    loading.current = true;
+    setLoading(true);
 
-    messages.current.push({
-      fromUser: true,
-      animatedText: text,
-    });
+    // Adicionar mensagem do usuário
+    setMessages((prev) => [
+      ...prev,
+      {
+        fromUser: true,
+        animatedText: text,
+      },
+    ]);
 
     try {
-      const response = await sendChatMessage({message: text});
-      console.log("[useChat] Resposta recebida do backend:", response);
+      // Enviar mensagem e receber resposta completa
+      const response = await sendChatMessage(text);
+      const botReply = response?.reply || '⚠️ Sem resposta do servidor';
 
-      const reply = String(response?.reply || "⚠️ Sem resposta");
+      // Adicionar resposta do bot ao histórico
+      setMessages((prev) => [
+        ...prev,
+        {
+          fromUser: false,
+          animatedText: botReply,
+        },
+      ]);
 
-      messages.current.push({
-        fromUser: false,
-        animatedText: reply,
-      });
-
-      console.log("[useChat] Resposta do bot adicionada:", reply);
+      // Marcar que já houve mensagem hoje
+      localStorage.setItem(LAST_MESSAGE_DATE_KEY, getToday());
+      setIsFirstOfDay(false);
     } catch (error) {
-      console.error("[useChat] Erro ao obter resposta:", error);
-      messages.current.push({
-        fromUser: false,
-        animatedText: "⚠️ Erro ao obter resposta.",
-      });
+      console.error('[useChatStream] Erro:', error);
+      setMessages((prev) => [
+        ...prev,
+        {
+          fromUser: false,
+          animatedText: '⚠️ Erro ao obter resposta.',
+        },
+      ]);
+    } finally {
+      setLoading(false);
     }
+  }, []);
 
-    loading.current = false;
-    console.log("[useChat] Fim do envio. loading = false");
-  };
-
-  const clearMessages = () => {
+  const clearMessages = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY);
-    messages.current = [];
-    console.log("[useChat] Mensagens limpas");
-  };
+    setMessages([]);
+  }, []);
 
   return {
     messages,
     loading,
     sendMessage,
     clearMessages,
+    isFirstOfDay,
   };
 }
