@@ -109,9 +109,7 @@ export function ChatMiniLeandro({ visible, onUpdateVisible }: ChatMiniLeandroPro
                       : 'bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500'
                   }`}
                 >
-                  {msg.animatedText || (
-                    <span className="inline-block w-2 h-5 bg-white animate-pulse ml-1" />
-                  )}
+                  {msg.animatedText}
                 </div>
               </div>
             ))}

@@ -63,28 +63,33 @@ export function useChatStream() {
       },
     ]);
 
-    // Criar espaço para a resposta do bot que será preenchida com streaming
-    setMessages((prev) => [
-      ...prev,
-      {
-        fromUser: false,
-        animatedText: '',
-      },
-    ]);
+    let botMessageAdded = false;
 
     try {
       // Usar streaming para receber a resposta em tempo real
       await sendChatStreamMessage(
         { message: text },
         (chunk: string) => {
-          // Atualizar a última mensagem (resposta do bot) com o novo chunk
-          setMessages((prev) => {
-            const updated = [...prev];
-            if (updated.length > 0) {
-              updated[updated.length - 1].animatedText += chunk;
-            }
-            return updated;
-          });
+          // Criar a mensagem do bot na primeira resposta
+          if (!botMessageAdded) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                fromUser: false,
+                animatedText: chunk,
+              },
+            ]);
+            botMessageAdded = true;
+          } else {
+            // Atualizar a última mensagem (resposta do bot) com o novo chunk
+            setMessages((prev) => {
+              const updated = [...prev];
+              if (updated.length > 0) {
+                updated[updated.length - 1].animatedText += chunk;
+              }
+              return updated;
+            });
+          }
         }
       );
 

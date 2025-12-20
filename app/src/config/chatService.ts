@@ -27,7 +27,7 @@ export async function sendChatStreamMessage(message:Message, onChunk:( chunk: st
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ message: message.message }),
     });
   
     if (!response.ok) {
