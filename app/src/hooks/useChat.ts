@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { sendChatMessage } from './useAxios';
+import { sendChatStreamMessage } from '../config/chatService';
 
 const STORAGE_KEY = 'mini-leandro-chat-history';
 const LAST_MESSAGE_DATE_KEY = 'mini-leandro-last-message-date';
@@ -63,32 +63,50 @@ export function useChatStream() {
       },
     ]);
 
-    try {
-      // Enviar mensagem e receber resposta completa
-      const response = await sendChatMessage(text);
-      const botReply = response?.reply || '⚠️ Sem resposta do servidor';
+    // Criar espaço para a resposta do bot que será preenchida com streaming
+    setMessages((prev) => [
+      ...prev,
+      {
+        fromUser: false,
+        animatedText: '',
+      },
+    ]);
 
-      // Adicionar resposta do bot ao histórico
-      setMessages((prev) => [
-        ...prev,
-        {
-          fromUser: false,
-          animatedText: botReply,
-        },
-      ]);
+    try {
+      // Usar streaming para receber a resposta em tempo real
+      await sendChatStreamMessage(
+        { message: text },
+        (chunk: string) => {
+          // Atualizar a última mensagem (resposta do bot) com o novo chunk
+          setMessages((prev) => {
+            const updated = [...prev];
+            if (updated.length > 0) {
+              updated[updated.length - 1].animatedText += chunk;
+            }
+            return updated;
+          });
+        }
+      );
 
       // Marcar que já houve mensagem hoje
       localStorage.setItem(LAST_MESSAGE_DATE_KEY, getToday());
       setIsFirstOfDay(false);
     } catch (error) {
       console.error('[useChatStream] Erro:', error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          fromUser: false,
-          animatedText: '⚠️ Erro ao obter resposta.',
-        },
-      ]);
+      // Se houve erro, remover a mensagem vazia e adicionar mensagem de erro
+      setMessages((prev) => {
+        const updated = [...prev];
+        if (updated.length > 0 && updated[updated.length - 1].animatedText === '') {
+          updated.pop();
+        }
+        return [
+          ...updated,
+          {
+            fromUser: false,
+            animatedText: '⚠️ Erro ao obter resposta. Tente novamente.',
+          },
+        ];
+      });
     } finally {
       setLoading(false);
     }
@@ -105,5 +123,6 @@ export function useChatStream() {
     sendMessage,
     clearMessages,
     isFirstOfDay,
+    setIsFirstOfDay,
   };
 }

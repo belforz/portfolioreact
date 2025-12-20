@@ -109,37 +109,39 @@ export function ChatMiniLeandro({ visible, onUpdateVisible }: ChatMiniLeandroPro
                       : 'bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500'
                   }`}
                 >
-                  {msg.animatedText}
+                  {msg.animatedText || (
+                    <span className="inline-block w-2 h-5 bg-white animate-pulse ml-1" />
+                  )}
                 </div>
               </div>
             ))}
 
             {/* INDICADOR DE DIGITAÇÃO */}
             {loading && !isFirstOfDay && (
-              <div className="flex items-end gap-2">
+              <div className="flex items-end gap-2 animate-in fade-in duration-300">
                 <img
                   src={botAvatar}
                   alt="Bot"
                   className="w-8 h-8 rounded-full border border-white flex-shrink-0"
                 />
-
-                <div className="bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 p-3 rounded-lg animate-pulse">
-                  Pensando...
+                <div className="bg-gradient-to-r from-red-500 via-yellow-500 to-blue-500 p-3 rounded-lg flex gap-1">
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" />
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                 </div>
               </div>
             )}
 
             {/* INDICADOR DE DIGITAÇÃO - PRIMEIRA MENSAGEM DO DIA */}
             {loading && isFirstOfDay && (
-              <div className="flex items-end gap-2">
+              <div className="flex items-end gap-2 animate-in fade-in duration-300">
                 <img
                   src={botAvatar}
                   alt="Bot"
                   className="w-8 h-8 rounded-full border border-white flex-shrink-0"
                 />
-
-                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 p-3 rounded-lg animate-pulse">
-                  ⏳ Aquecendo os neurônios...
+                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 p-3 rounded-lg">
+                  <span className="text-sm">⏳ Aquecendo os neurônios...</span>
                 </div>
               </div>
             )}
