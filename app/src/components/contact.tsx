@@ -28,7 +28,7 @@ export function Contact({ content, transitions }: ContactProps) {
     }transition-all motion-reduce:transition-none duration-500`}>
       
     <div className={`flex-grow border-t  ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
-    <h1 className={`text-3xl font-bold px-5 text-black ${darkModeActive ? 'text-white' : 'text-black'}`}>📭Contato</h1>
+    <h1 className={`text-3xl font-bold px-5 ${darkModeActive ? 'text-white' : 'text-slate-700'}`}>📭Contato</h1>
     <div className={`flex-grow border-t ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
 
     </div>
@@ -47,7 +47,7 @@ export function Contact({ content, transitions }: ContactProps) {
           />
         ) : (
           <div className="space-y-8 mx-auto text-center">
-            <h1 className="text-3xl !font-extrabold mb-4 text-center dark:text-white">Vamos nos falando...</h1>
+            <h1 className={`text-3xl !font-extrabold mb-4 text-center ${darkModeActive ? 'text-white' : 'text-slate-700'}`}>Vamos nos falando...</h1>
             {content.externalLink?.note.map((msg, idx) => (
               <p key={idx} className="text-slate-500 p-8 dark:text-slate-300">{msg}<br /></p>
             ))}

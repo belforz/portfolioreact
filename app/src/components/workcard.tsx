@@ -40,7 +40,7 @@ export function Experience({ transitions, content }: ExperienceSectionProps) {
                         : "translate-y-4 opacity-0 blur-sm"
                 } transition-all motion-reduce:transition-none duration-500`}
             >
-                <h1 className={`text-3xl font-bold pr-5 ${darkModeActive ? 'text-white' : 'text-black'}`}>🛡️ Experiencias</h1>
+                <h1 className={`text-3xl font-bold pr-5 ${darkModeActive ? 'text-white' : 'text-slate-700'}`}>🛡️ Experiencias</h1>
         <div className={`flex-grow border-t border-1 ${darkModeActive ? 'border-white' : 'border-black'}`}></div>
             </div>
             <div

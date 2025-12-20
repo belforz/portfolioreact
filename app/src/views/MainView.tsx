@@ -37,7 +37,7 @@ export default function MainView() {
   }
 
   return (
-    <div className={`min-h-screen overscroll-contain bg-${darkModeActive ? 'black' : 'white'} dark:text-slate-300 text-base md:text-xl`}>
+    <div className={`min-h-screen overscroll-contain bg-${darkModeActive ? 'black' : 'white'} ${darkModeActive ? 'text-white' : 'text-slate-700'} text-base md:text-xl`}>
       <NavBar showTransition={portfolio.transitions.active} />
 
       <div

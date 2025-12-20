@@ -1,3 +1,4 @@
+import useDarkMode from "../../hooks/useDarkMode";
 import type { SkillItemProps } from "../../types/sections"
 import { useState, useEffect } from 'react';
 
@@ -13,6 +14,7 @@ export function SkillCard({ skill, className = "", style }: SkillCardProps) {
   const getSvgOrImageUrl = (path: string) => {
     return `/assets/${path.replace('assets/', '')}`
   }
+  const {darkModeActive} = useDarkMode();
 
   useEffect(() => {
     if (skill.svgLink === "no-asset") {
@@ -21,7 +23,7 @@ export function SkillCard({ skill, className = "", style }: SkillCardProps) {
   }, [skill.svgLink]);
   
   return (
-    <div className={`flex flex-col items-center justify-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ${showSkill ? 'opacity-100' : 'opacity-0'} ${className}`} style={style}>
+    <div className={`flex flex-col items-center justify-center p-4 ${darkModeActive ? 'bg-black' : 'bg-white'} rounded-lg shadow-md hover:shadow-lg transition-all duration-300 ${showSkill ? 'opacity-100' : 'opacity-0'} ${className}`} style={style}>
         {skill.svgLink !== "no-asset" ? (
             <img
                 src={getSvgOrImageUrl(skill.svgLink)}
@@ -32,11 +34,11 @@ export function SkillCard({ skill, className = "", style }: SkillCardProps) {
                 onError={() => setShowSkill(true)}
             />
         ) : (
-            <div className="w-12 h-12 mb-2 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center">
+            <div className={`w-12 h-12 mb-2 ${darkModeActive ? 'bg-gray-700' : 'bg-gray-200'} rounded-full flex items-center justify-center`}>
                 <span className="text-2xl">💡</span>
             </div>
         )}
-        <p className="text-center text-sm font-medium text-slate-700 dark:text-slate-300">{skill.label}</p>
+        <p className={`text-center text-sm font-medium ${darkModeActive ? 'text-white' : 'text-slate-700'}`}>{skill.label}</p>
     </div>
   )
 }
