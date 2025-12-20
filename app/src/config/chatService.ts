@@ -21,8 +21,11 @@ export const sendChatMessage = async(message: Message) => {
 }
 
 export async function sendChatStreamMessage(message:Message, onChunk:( chunk: string) => void) {
+    // Usar a mesma base URL que chatApi para evitar problemas de CORS em produção
+    const baseUrl = import.meta.env.VITE_PUBLIC_API_CHAT;
+    const streamUrl = `${baseUrl}/chat/stream`;
 
-    const response = await fetch(import.meta.env.VITE_PUBLIC_API_STREAM, {
+    const response = await fetch(streamUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
