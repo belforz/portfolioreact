@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useOnIntersect } from "../hooks/onIntersect";
 import type { ProjectSectionProps } from "../types/sections";
-import { ProjectCard } from "./cards/projectcard";
+import { ProjectCard } from "./cards/ProjectCard";
 import useDarkMode from "../hooks/useDarkMode";
 
 export function Project({ content, transitions }: ProjectSectionProps) {
