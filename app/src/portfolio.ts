@@ -357,6 +357,23 @@ const works = [
         alignLeft: true,
         isImportant: false
     },
+    {
+        projectName: "Buscador de Imagens da Nasa com ReactNative",
+        yearCompleted: "2025",
+        description: "Node.js com React Native para buscar imagens da NASA através de sua API pública",
+        techStack: "#JavaScript, #React Native, #Node.js, #NASA API",
+        links: [
+            {
+                label: "GitHub",
+                type: "git",
+                url: "https://github.com/belforz/prova_pdmn_oficial"
+            },
+        ],
+        imageLink: "images/horrivel.png",
+        alignLeft: false,
+        isImportant: false
+    },
+
      {
         projectName: "Loja de Adoção de Pets",
         yearCompleted: "2025",
