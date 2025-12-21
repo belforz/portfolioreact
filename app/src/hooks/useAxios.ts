@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-console.log('VITE_PUBLIC_API_CHAT:', import.meta.env.VITE_PUBLIC_API_CHAT);
-
 const chatApi = axios.create({
   baseURL: import.meta.env.VITE_PUBLIC_API_CHAT,
 });

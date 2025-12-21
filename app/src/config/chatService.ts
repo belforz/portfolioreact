@@ -20,41 +20,51 @@ export const sendChatMessage = async(message: Message) => {
     return response.data;
 }
 
-export async function sendChatStreamMessage(message:Message, onChunk:( chunk: string) => void) {
-    // Usar fetch para streaming
-    const streamUrl = import.meta.env.VITE_PUBLIC_API_STREAM;
+// export async function sendChatStreamMessage(message:Message, onChunk:( chunk: string) => void) {
+//     // TODO: Resolver problema de CORS com o endpoint /chat/stream
+//     // Por enquanto usando sendChatMessage normal
+//     const response = await sendChatMessage(message);
+    
+//     if (response?.response) {
+//       onChunk(response.response);
+//     }
+// }
 
-    const response = await fetch(streamUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: message.message }),
-    });
+// export async function sendChatStreamMessage(message:Message, onChunk:( chunk: string) => void) {
+//     // Usar fetch para streaming
+//     const streamUrl = import.meta.env.VITE_PUBLIC_API_STREAM;
+
+//     const response = await fetch(streamUrl, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ message: message.message }),
+//     });
   
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error("❌ Erro na resposta da API:", response.status, errorText);
-      return;
-    }
+//     if (!response.ok) {
+//       const errorText = await response.text();
+//       console.error("❌ Erro na resposta da API:", response.status, errorText);
+//       return;
+//     }
   
-    if (!response.body) {
-      console.error("❌ Response body is null.");
-      return;
-    }
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder("utf-8");
+//     if (!response.body) {
+//       console.error("❌ Response body is null.");
+//       return;
+//     }
+//     const reader = response.body.getReader();
+//     const decoder = new TextDecoder("utf-8");
   
-    let done = false;
-    while (!done) {
-      const { value, done: readerDone } = await reader.read();
-      done = readerDone;
+//     let done = false;
+//     while (!done) {
+//       const { value, done: readerDone } = await reader.read();
+//       done = readerDone;
   
-      if (value) {
-        const chunk = decoder.decode(value, { stream: true });
-        onChunk(chunk);
-      }
-    }
-  }
+//       if (value) {
+//         const chunk = decoder.decode(value, { stream: true });
+//         onChunk(chunk);
+//       }
+//     }
+//   }
   
   

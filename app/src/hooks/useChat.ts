@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from 'react';
-import { sendChatStreamMessage } from '../config/chatService';
+import { sendChatMessage } from '../config/chatService';
 
 const STORAGE_KEY = 'mini-leandro-chat-history';
 const LAST_MESSAGE_DATE_KEY = 'mini-leandro-last-message-date';
@@ -63,55 +63,32 @@ export function useChatStream() {
       },
     ]);
 
-    let botMessageAdded = false;
-
     try {
-      // Usar streaming para receber a resposta em tempo real
-      await sendChatStreamMessage(
-        { message: text },
-        (chunk: string) => {
-          // Criar a mensagem do bot na primeira resposta
-          if (!botMessageAdded) {
-            setMessages((prev) => [
-              ...prev,
-              {
-                fromUser: false,
-                animatedText: chunk,
-              },
-            ]);
-            botMessageAdded = true;
-          } else {
-            // Atualizar a última mensagem (resposta do bot) com o novo chunk
-            setMessages((prev) => {
-              const updated = [...prev];
-              if (updated.length > 0) {
-                updated[updated.length - 1].animatedText += chunk;
-              }
-              return updated;
-            });
-          }
-        }
-      );
+      // Usar sendChatMessage para obter a resposta completa
+      const response = await sendChatMessage({ message: text });
+
+      // Adicionar mensagem do bot com a resposta completa
+      setMessages((prev) => [
+        ...prev,
+        {
+          fromUser: false,
+          animatedText: response.reply || 'Resposta não disponível.',
+        },
+      ]);
 
       // Marcar que já houve mensagem hoje
       localStorage.setItem(LAST_MESSAGE_DATE_KEY, getToday());
       setIsFirstOfDay(false);
     } catch (error) {
       console.error('[useChatStream] Erro:', error);
-      // Se houve erro, remover a mensagem vazia e adicionar mensagem de erro
-      setMessages((prev) => {
-        const updated = [...prev];
-        if (updated.length > 0 && updated[updated.length - 1].animatedText === '') {
-          updated.pop();
-        }
-        return [
-          ...updated,
-          {
-            fromUser: false,
-            animatedText: '⚠️ Erro ao obter resposta. Tente novamente.',
-          },
-        ];
-      });
+      // Adicionar mensagem de erro
+      setMessages((prev) => [
+        ...prev,
+        {
+          fromUser: false,
+          animatedText: '⚠️ Erro ao obter resposta. Tente novamente.',
+        },
+      ]);
     } finally {
       setLoading(false);
     }
