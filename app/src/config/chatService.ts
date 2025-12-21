@@ -1,4 +1,4 @@
-import { chatApi } from "../../../api/service/axios-config";
+import { chatApi} from "../../../api/service/axios-config";
 import type { Message } from "../types/request";
 
 export const checkChatHealth = async() =>{
@@ -21,9 +21,8 @@ export const sendChatMessage = async(message: Message) => {
 }
 
 export async function sendChatStreamMessage(message:Message, onChunk:( chunk: string) => void) {
-    // Usar a mesma base URL que chatApi para evitar problemas de CORS em produção
-    const baseUrl = import.meta.env.VITE_PUBLIC_API_CHAT;
-    const streamUrl = `${baseUrl}/chat/stream`;
+    // Usar fetch para streaming
+    const streamUrl = import.meta.env.VITE_PUBLIC_API_STREAM;
 
     const response = await fetch(streamUrl, {
       method: "POST",
