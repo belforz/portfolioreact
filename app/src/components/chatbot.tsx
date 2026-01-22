@@ -138,8 +138,11 @@ export function ChatMiniLeandro({ visible, onUpdateVisible }: ChatMiniLeandroPro
                   alt="Bot"
                   className="w-8 h-8 rounded-full border border-white flex-shrink-0"
                 />
-                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 p-3 rounded-lg">
-                  <span className="text-sm">⏳ Aquecendo os neurônios...</span>
+                <div className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 p-3 rounded-lg flex items-center gap-1">
+                  <span>Aquecendo </span>
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" />
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                  <span className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                 </div>
               </div>
             )}
