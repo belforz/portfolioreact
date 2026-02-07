@@ -11,8 +11,8 @@ export function Landing(props: LandingProps) {
                     className={`animate-glow w-64 h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full shadow-md transition-all motion-reduce:transition-none duration-500 delay-[400ms] ${showTransition ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'}`}
                     src={content.portraitLink as string}
                     alt={content.name as string}
-                    style={{'--glow-color1': '#d7ddd780',
-                  '--glow-color2': '#080808cc' 
+                    style={{'--glow-color1': '#e8797980',
+                  '--glow-color2': '#720303cc' 
                  } as React.CSSProperties}
                 />
                 <div className="!mx-4 flex flex-col !space-y-2">
