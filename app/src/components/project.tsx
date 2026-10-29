@@ -1,41 +1,39 @@
-import { useRef, useState } from "react";
-import { useOnIntersect } from "../hooks/onIntersect";
-import type { ProjectSectionProps } from "../types/sections";
-import { ProjectCard } from "./cards/ProjectCard";
-import useDarkMode from "../hooks/useDarkMode";
+import { useState } from "react";
+import type { PhotusContent, ProjectItem } from "../types/sections";
+import { Section } from "./section";
+import { Photus } from "./photus";
+import { ProjectEntry } from "./projectEntry";
 
-export function Project({ content, transitions }: ProjectSectionProps) {
-    const workSection = useRef<HTMLElement>(null) as React.RefObject<HTMLElement>;
-    const intersectionVisible = useOnIntersect(workSection, transitions.showOnce,{
-        threshold: transitions.thresholdOption,
-    });
-    const visible =
-        transitions.active &&
-        window.matchMedia("(prefers-reduced-motion: no-preference)").matches
-            ? intersectionVisible
-            : true;
-    const projInitial = content.works.filter((_, index) => index < 3);
-    const showPreview = content.works.length > 3;
-    const [showMore, setShowMore] =  useState(false);
-    const { darkModeActive } = useDarkMode();
+const INITIAL = 6;
+
+interface ProjectProps {
+    photus: PhotusContent;
+    works: ProjectItem[];
+    archiveLink: string;
+}
+
+export function Project({ photus, works, archiveLink }: ProjectProps) {
+    const [showAll, setShowAll] = useState(false);
+    const visible = showAll ? works : works.slice(0, INITIAL);
 
     return (
-    <section className="min-h-screen w-full" ref={workSection} id="work-section">
-        <div className={`relative flex py-5 items-center ${visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-sm'} transition-all motion-reduce:transition-none duration-500`}>
-            <h1 className="text-3xl font-bold pr-2 sm:pr-5">💻 Projetos</h1>
-            <div className={`flex-grow border-t ${darkModeActive ? 'border-white' : 'border-black'} border-1`}></div>
-            <a href="https://github.com/belforz?tab=repositories" className="pl-2 sm:pl-5 hover:text-link-color text-right text-sm">Histórico</a>
-        </div>
-        <div className={`flex flex-col gap-8 transition-all motion-reduce:transition-none duration-500 delay-300 ${visible ? 'translate-y-0 opacity-100 blur-0' : 'translate-y-4 opacity-0 blur-sm'}`}>
-            {(showMore ? content.works : projInitial).map((project, index) => (
-                <ProjectCard key={index} project={project} />
-            ))}
+        <Section id="projetos" title="Projetos" lead="O Photus, meu TCC, e outros trabalhos acadêmicos, pessoais e freelas.">
+            <Photus content={photus} />
 
-            {showPreview && (
-                <button onClick={() => setShowMore(!showMore)} className="w-52 py-2 px-6 mx-auto mt-10 bg-transparent border border-button-color text-button-color shadow-sm shadow-button-color transition ease-in-out hover:bg-button-color hover:text-white focus:bg-button-color focus:text-white active:bg-button-color active:text-white duration-300">
-                    {showMore ? "Mostrar menos" : "Mostrar mais" }
-                </button>
-            )}
-        </div>
-    </section>
-    )}
+            <h3 className="sub-title">Outros projetos</h3>
+            <div className="stack">
+                {visible.map((project) => (
+                    <ProjectEntry key={project.name} project={project} />
+                ))}
+            </div>
+            <div className="links" style={{ marginTop: "2rem" }}>
+                {works.length > INITIAL && (
+                    <button type="button" className="plain" onClick={() => setShowAll(!showAll)}>
+                        {showAll ? "mostrar menos" : `mostrar todos (${works.length})`}
+                    </button>
+                )}
+                <a href={archiveLink} target="_blank" rel="noopener noreferrer">todos os repositórios ↗</a>
+            </div>
+        </Section>
+    );
+}

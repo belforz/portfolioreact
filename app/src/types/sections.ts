@@ -1,101 +1,78 @@
-export type TransitionsProps = {
-    active: boolean;
-    showOnce: boolean;
-    thresholdOption: number;
-}
-
-export type LandingProps = {
-    content: Record<string, unknown>;
-    transitions: TransitionsProps;
-}
-
-export type AboutProps = {
-    content: {
-        autobiography: string [];
-        techStack: string [];
-        photo1Link?: string;
-        photo2Link?: string;
-    };
-    transitions: TransitionsProps;
-}
-
-export type ContactProps = {
-    content: {
-        formEmbedLink?: string;
-        externalLink?: {
-            note: string[];
-            link: {
-                email?:string;
-                other?: string;
-            }
-        
-        };
-        responseTimeMessage?: string;
-    }
-    transitions: TransitionsProps;
-    
-}
-
-export type ProjectSectionProps = {
-    content: {
-        works: WorksProps [];
-    };
-    transitions: TransitionsProps;
-}
-
-export type LinksProps = {
+export type LinkItem = {
     label: string;
-    type: string;
     url: string;
 }
 
-export type WorksProps = {
-    projectName: string;
-    yearCompleted: string;
-    description: string;
-    techStack: string;
-    links: LinksProps[];
-    imageLink: string;
-    alignLeft: boolean;
-    isImportant: boolean;
-    archiveLink?: string;
+export type GreetingContent = {
+    intro: string;
+    name: string;
+    role: string;
+    location: string;
+    summary: string;
+    portraitLink: string;
+    resumeLink: string;
 }
 
-
-
-export type ExperienceSectionProps = {
-    content: {
-        experiences: ExperienceProps[];
-    };
-    transitions: TransitionsProps;
+export type AboutContent = {
+    paragraphs: string[];
+    facts: { label: string; value: string }[];
+    photos: string[];
 }
 
-export type ExperienceProps = {
-        position: string;
-        company: {
-            name: string;
-        }
-        duration: string;
-        bulletPoints: string[];
-        hashtags: string[];
+export type RoleItem = {
+    title: string;
+    period: string;
+    bullets: string[];
+    stack: string[];
 }
 
-export type SkillItemProps = {
-    svgLink: string;
+export type ExperienceItem = {
+    company: string;
+    location: string;
+    period: string;
+    roles: RoleItem[];
+}
+
+export type SkillGroup = {
     label: string;
+    items: string[];
 }
 
-export type SkillsProps = {
-    content: {
-        skills: SkillItemProps[];
-    }
+export type ProjectItem = {
+    name: string;
+    year?: string;
+    kind?: string;
+    description: string;
+    bullets?: string[];
+    stack: string[];
+    links: LinkItem[];
+    image?: string;
+    imageCaption?: string;
 }
 
-export type SkillsSectionProps = {
-    content: {
-        skills: SkillItemProps[];
-        
-    };
-    transitions: TransitionsProps;
+export type PhotusContent = {
+    title: string;
+    context: string;
+    summary: string;
+    pipeline: string[];
+    parts: ProjectItem[];
 }
 
+export type EducationItem = {
+    title: string;
+    place: string;
+    period: string;
+}
+
+export type CertificationItem = {
+    title: string;
+    detail: string;
+    year: string;
+}
+
+export type ContactContent = {
+    note: string;
+    email: string;
+    responseTime: string;
+    links: LinkItem[];
+}

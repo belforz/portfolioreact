@@ -1,608 +1,413 @@
-// --- 🎨 Site Styling ---
+import type {
+    AboutContent,
+    CertificationItem,
+    ContactContent,
+    EducationItem,
+    ExperienceItem,
+    GreetingContent,
+    PhotusContent,
+    ProjectItem,
+    SkillGroup,
+} from "./types/sections";
 
-// Colors (recommendation: choose a color suitable for dark and light modes)
-// Should be inputted as a hex value. Use https://g.co/kgs/XCcs7T for choosing colors with hex.
-const colors = {
-    buttonColor: "#4305ba",
-    LinkHighlightColor: "#4305ba",
-    textSub: "#FF0000",
-    textSubUnline: "#0FFF50"
-}
+const gh = "https://github.com/belforz";
 
-// Transitions
-const transitions = {
-    active: true, // activate for all sections
-    onlyLanding: false, // activate only for initial load of landing page
-    showOnce: true, // transition only once
-    thresholdOption: 0.2 // indicates at what percentage of the sections visibility the transition should start
-}
-
-// Splash Screen
-const splashScreen = true // recommended: for best behavior after refresh
-
-// --- 👋 Greeting Section ---
-const greeting = {
+const greeting: GreetingContent = {
     intro: "Olá, meu nome é",
     name: "Leandro Belfor",
-    message: "Sou estudande de Análise e Desenvolvimento de Sistemas, cai de paraquedas nesse mundo digital e olha que até que meu pouso foi bem, que tal conhecer-lo?",
-    basedLocation: "São Paulo, SP",
-    resumeLink: "https://drive.google.com/file/d/18Sa6gTbvJ0hBPNPacZst_8GzI4GJFaw7/view?usp=sharing",
-    logo: {
-        // link: "images/logo1.png", // use relative path from  parent directory -> ex: images/image.ext
-        custom: true // takes precedence over image logo and allows for custom HTML logo (./components/Navbar.vue)
-    },
-    portraitLink: 'assets/red.png'
-}
+    role: "Engenheiro de Software · NLP e Machine Learning",
+    location: "São Paulo, SP",
+    summary:
+        "Desenvolvo soluções de IA generativa, NLP e arquiteturas conversacionais na Vivo (Telefônica Brasil): modelos baseados em Transformers, APIs e pipelines de inferência em produção.",
+    portraitLink: "assets/red.png",
+    resumeLink:
+        "https://drive.google.com/file/d/18Sa6gTbvJ0hBPNPacZst_8GzI4GJFaw7/view?usp=sharing",
+};
 
 const socialMediaLinks = {
-    github: "https://github.com/belforz",
+    github: gh,
     linkedin: "https://www.linkedin.com/in/leandro-belfor-ba3640143/",
-    photography: "https://belforzphotography.vercel.app/"
-    // medium: "https://medium.com/@mimaishel",
-    // stackoverflow: "",
-    // xtwitter: "https://twitter.com/mimaishel"
-} // to add any additional social media links check out the README.md or src/icons.js file
+    photography: "https://belforzphotography.vercel.app/",
+};
 
-// --- 😎 About Section ---
-const about = {
-    autobiography: [
-        "Uma paixão por códigos, letras e problemas seja em Python, JavaScript e outras. ",
-        "Responsável, comunicativo, proativo, conciso nas palavras e amante de cinema viu? Estou estudando e trabalhando dentro do mundo do Desenvolvimento por mais de 1 ano e meio, atualmente estou na busca de um estágio ou vaga junior que adentre no mundo da Tecnologia."
-    ], // Separated items are paragraphs
-    techStack: [
-        "Python",
-        "Java",
-        "JavaScript",
-        "Frameworks JS",
-        "SQL Language",
-        "No-SQL"
+const about: AboutContent = {
+    paragraphs: [
+        "Trabalho há mais de dois anos com tecnologia, hoje em NLP e ML voltados à experiência conversacional de chatbots: ajuste de modelos, otimização de inferência, APIs em Python e integração com canais corporativos.",
+        "Meu TCC na FATEC Ipiranga é o Photus, um sistema de curadoria de fotografias que combina visão computacional em C++ com classificação semântica de linguagem natural. Fora do código: cinema e fotografia.",
     ],
-    photo1Link: "assets/eufundo.png",
-    photo2Link: "assets/eufundo3.png",
+    facts: [
+        { label: "Atual", value: "Vivo (Telefônica Brasil), NLP/ML" },
+        { label: "Formação", value: "ADS na FATEC Ipiranga, previsão 2027" },
+        { label: "Foco", value: "NLP, LLMs, MLOps, APIs" },
+        { label: "Idiomas", value: "Português nativo, inglês avançado, espanhol básico" },
+    ],
+    photos: ["assets/eufundo-web.jpg", "assets/eufundo3-web.jpg"],
+};
 
-
-}
-
-const iconsImages = {
-    userImage: "assets/user-me.png",
-    botImage: "assets/bot-me-vegeta.png",
-}
-
-// --💪🤝--- Skills Section ---
-
-const skills = [{
-        svgLink: "assets/svg/javascript-icon.svg",
-        label: "JavaScript",
-    },
+const experiences: ExperienceItem[] = [
     {
-        svgLink: "assets/svg/python-icon.svg",
-        label: "Python",
-    },
-    {
-        svgLink: "assets/svg/w3_html5-icon.svg",
-        label: "HTML",
-    },
-    {
-        svgLink: "assets/svg/w3_css-icon.svg",
-        label: "CSS",
-    },
-    {
-        svgLink: "assets/react.svg",
-        label: "React",
-    },
-    {
-        svgLink: "assets/svg/tailwindcss-icon.svg",
-        label: "Tailwind CSS",
-    },
-    {
-        svgLink: "assets/svg/sdk-react-native.svg",
-        label: "React Native",
-    },
-    {
-        svgLink: "assets/svg/vuejs-icon.svg",
-        label: "Vue.js",
-    },
-        {
-        svgLink: "assets/svg/nodejs-icon.svg",
-        label: "Node.js",
-    },
-    {
-        svgLink: "assets/svg/php-icon.svg",
-        label: "PHP",
-    },
-    {
-        svgLink: "assets/svg/java-icon.svg",
-        label: "Java",
-    },
-    {
-        svgLink: "assets/svg/mysql-icon.svg",
-        label: "SQL Language",
-    },
-    {
-        svgLink: "no-asset",
-        label: "No-SQL",
-    },
-    {
-        svgLink: "assets/svg/nlp.png",
-        label: "Natural Language Processing"
-    },
-    {
-        svgLink: "assets/svg/nlp_um.png",
-        label: "Advanced NLP in Semantics and Text Classification"
-    },
-    {
-        svgLink: "assets/svg/pytorch.svg",
-        label: "PyTorch",
-    },
-    {
-        svgLink: "assets/svg/tensorflow.svg",
-        label: "TensorFlow"
-    },
-    {
-        svgLink: "assets/svg/opencv.png",
-        label: "OpenCV",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Ingles",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Espanhol",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Sociabilidade",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Comunicação",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Trabalho em Grupo",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Inovação",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Curiosidade",
-    },
-    {
-        svgLink: "no-asset",
-        label: "Proatividade",
-    }
-]
-   
-
-
-// --- 🛡️ Experience Section ---
-const experiences = [
-
-    {
-        position: "Estágiario em Inteligência Artificial",
-        company: {
-            name: "Vivo(Telefônica Brasil).",
-
-        },
-        duration: "Set 2024 - (Atualmente)",
-        bulletPoints: [
-            "Manuntenção e Ampliação de Novos Negócios envolvendo Inteligência Artificial",
-            "Comunicando-se com tecnologias como Python, Node.js, React e outras",
-            "Integração com diversas áreas dentro da Vivo, aplica-se comunicação de áreas e versionamento de projetos"
-        ],
-        hashtags: [
-            "JavaScript",
-            "React",
-            "Node.js",
-            "Argo",
-            "Python", "Docker", "Postman", "Github"
-
-
-        ]
-    },
-
-    {
-        position: "Técnico em Infraestrutura de Redes Freelancer",
-        company: {
-            name: "iT Solutions Zona Sul.",
-
-        },
-        duration: "Jun 2024 - Set 2024",
-        bulletPoints: [
-            "Manuseamento de cabos na rede fixa/portable;",
-            " Manutenção de redes físicas e virtuais, além de teste pós vendas",
-
-        ],
-        hashtags: [
-            "Redes",
-            "Cabeamentos",
-            "Protocolos",
-            "Manunteção",
-
-
-
-        ]
-    },
-
-    {
-        position: "Desenvolvedor Freelancer",
-        company: {
-            name: "Grupo R&M Administração.",
-
-        },
-        duration: "Mai 2024 - Mai 2024",
-        bulletPoints: [
-            "Construção e Desenvolvimento de um site que atualiza a nova imagem e estrutura da empresa",
-            "De acordo com os designs elaborados, com seu aspectos minimalistas",
-            "Através de tecnologias como PHP, JS e CSS."
-        ],
-        hashtags: [
-            "PHP",
-            "locaweb",
-            "JS",
-            "CSS",
-            "HTML",
-
-        ]
-    },
-    {
-        position: "Desenvolvedor Freelancer",
-        company: {
-            name: "Time Solutions LTDA.",
-
-        },
-        duration: "Dez 2023 - Março 2024",
-        bulletPoints: [
-            "Planejamento e Estruturação de sites para a limpeza de nome de pessoas em inadimplência com utilização de tecnologia JavaScript, HTML e CSS com mascaramento de rotas além de um serviço para o cancelamentode CPNJ, seguindo as boas práticas do mercado.",
-            "Estilo em landing page ecom utilização das tecnologias SCSS, JavaScript e HTML",
-            "Hospedagem de contéudo e UX Design"
-        ],
-        hashtags: [
-            "Laravel",
-            "PHP",
-            "JavaScript",
-            "Vue.js",
-            "HTML",
-
-        ]
-    },
-    {
-        position: "Garçom",
-        company: {
-            name: "AGA CARNEIRO RESTAURANTE",
-        },
-        duration: "Jun 2022 - Maio 2024",
-        bulletPoints: [
-            "Atendimento ao Cliente, Recepção",
-            "Comunicação em Inglês para Estrangeiros.",
-        ],
-        hashtags: [
-            "Inglês",
-            "Comunicação",
-            "Trabalho em Grupo",
-            "Dinâmica Social"
-        ]
-    }, {
-        position: "Garçom",
-        company: {
-            name: "Madero Industria & Comércio",
-        },
-        duration: "Dez 2019 - Fev 2022",
-        bulletPoints: [
-            "Atendimento ao Cliente, Recepção",
-            "Comunicação em Inglês para Estrangeiros.",
-        ],
-        hashtags: [
-            "Inglês",
-            "Comunicação",
-            "Trabalho em Grupo",
-            "Dinâmica Social"
-        ]
-    },
-
-    {
-        position: "Assistente",
-        company: {
-            name: "AISEC no Brasil",
-        },
-        duration: "Ago 2018 - Dez 2018",
-        bulletPoints: [
-            "Acompanhamento de intercambistas na região de Belém",
-            "Lidar com suas rotinas nos projetos sociais da cidade",
-            "Uso continuo do Inglês para sua sustenção"
-        ],
-        hashtags: [
-            "Inglês",
-            "Comunicação",
-            "Trabalho em Grupo",
-            "Dinâmica Social"
-        ]
-    }
-]
-
-// --- 💻 Work Section ---
-const works = [
-    {
-        projectName: "NLP Classification Module",
-        yearCompleted: "2025",
-        description: "Modulo avançado de NLP, incluindo analise de tendências, extração de entidades nomeadas. Além de classificação de texto e pontuanção por matrizes de risco.",
-        techStack: "#Sentence Transformers, #Python, #SpaCy, #NLTK, #HuggingFace",
-        links: [
+        company: "Vivo (Telefônica Brasil)",
+        location: "São Paulo, SP · Home office",
+        period: "09/2024 – atual",
+        roles: [
             {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/classification-nlp"
-            },
-        ],
-        imageLink: "images/NLP.jpg",
-        alignLeft: false,
-        isImportant: false
-    },
-    {
-        projectName: "NLP Semantics Module",
-        yearCompleted: "2025",
-        description: "Pré pesquisa de uma futura iniciação cientifica, envolvendo semântica textual com NLP, utilizando modelos de linguagem avançados para análise de similaridade semântica e agrupamento de textos",
-        techStack: "#Sentence Transformers, #Python, #Numpy, #HuggingFace, #Cosine Similarity",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/classification-nlp"
-            },
-        ],
-        imageLink: "images/image2.png",
-        alignLeft: true,
-        isImportant: false
-    },
-    {
-        projectName: "Buscador de Imagens da Nasa com ReactNative",
-        yearCompleted: "2025",
-        description: "Node.js com React Native para buscar imagens da NASA através de sua API pública",
-        techStack: "#JavaScript, #React Native, #Node.js, #NASA API",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/prova_pdmn_oficial"
-            },
-        ],
-        imageLink: "images/horrivel.png",
-        alignLeft: false,
-        isImportant: false
-    },
-
-     {
-        projectName: "Loja de Adoção de Pets",
-        yearCompleted: "2025",
-        description: "Loja de Adoção de Pets é uma plataforma para facilitar a adoção de animais de estimação, conectando abrigos e adotantes de forma simples e eficiente.",
-        techStack: "#Java, #Python, #TKInter, #GUISWING, #MySQL",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/doacao_animal_app"
-            },
-        ],
-        imageLink: "images/pets.jpg",
-        alignLeft: false,
-        isImportant: false
-    },
-     {
-        projectName: "Loja de Vinis",
-        yearCompleted: "2025",
-        "description": "Loja de Vinis é uma plataforma de e-commerce desenvolvida para a venda de discos de vinil. Com um design minimalista e responsivo, a loja oferece uma experiência de compra intuitiva e agradável.",
-        techStack: "#React, #Typescript, #Java, #MongoDB",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/v-disk-interface"
-            },{
-                label: "Website",
-                type: "external",
-                url: "https://v-disk-interface.vercel.app/"
-            }
-        ],
-        imageLink: "images/v-disk.png",
-        alignLeft: true,
-        isImportant: false
-    },
-    {
-        projectName: "Mini Photshop em C",
-        yearCompleted: "2025",
-        "description": "Mini Photshop é um editor de imagens leve e minimalista, desenvolvido em C. Ele permite que os usuários realizem edições básicas em suas fotos, como recorte, redimensionamento e ajuste de cores.",
-        techStack: "#C, #GTK",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/mini-photoshop-app"
-            }
-        ],
-        imageLink: "images/photoshopC.png",
-        alignLeft: false,
-        isImportant: false
-    },
-    {
-        projectName: "Mini Leandro",
-        yearCompleted: "2025",
-        "description": "🤖 Mini Leandro é um agente inteligente desenvolvido para interagir de forma natural e dinâmica, utilizando IA generativa. Com um design minimalista e responsivo, ele combina Vue.js e Python para oferecer conversas fluidas e personalizadas. Ele evoluiu para atender intenções através de NLP e agir de maneira independente.",
-        techStack: "#Generative AI, #Python, #Vue.js, #Redis, #Mongo",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/mini-leandro-back-end"
-            }
-        ],
-        imageLink: "images/noovo.png",
-        alignLeft: true,
-        isImportant: false
-    },
-      {
-        projectName: "MusicSom",
-        yearCompleted: "2025",
-        "description": "🎧 Musicsom é um sistema inteligente de recomendação musical criado para estimular descobertas fora da zona de conforto. Focado nas características técnicas e sensoriais dos álbuns, ele permite que o usuário escolha o que deseja ouvir com base em instrumentos, BPM, vocais e atmosfera — sem depender de gênero ou artista. o Musicsom é o seu curador musical técnico e personalizado. 🎶",
-        techStack: "#SQL, #BrModel",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/projeto-musicsomj"
-            }
-        ],
-        imageLink: "images/musicsom.png",
-        alignLeft: false,
-        isImportant: false
-    },
-
-    {
-        projectName: "Obranet",
-        yearCompleted: "2024",
-        description: "🚧 Gestor de Obras: Projeto acadêmico que automatiza a gestão de clientes, funcionários e obras no Excel. Com cadastro, edição, pesquisa e exclusão, une teoria e prática para simplificar processos.",
-        techStack: "#Excel, #Visual Basic Application (VBA)",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/projeto-final-pmi"
-            }
-        ],
-        imageLink: "images/obranet.png",
-        alignLeft: true,
-        isImportant: false
-    },
-    {
-        projectName: "Fotografias",
-        yearCompleted: "2024",
-        description: "Um olhar fotogênico e criativo sobre o mundo, este projeto visa atender a um almejo pessoal que inspira os meus conhecimentos técnicos dentro do mundo da Tecnologia",
-        techStack: "#JavaScript, #Vue.js, #TailwindCSS",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/portfoliophotos"
+                title: "Engenheiro de Software Júnior · NLP/ML",
+                period: "06/2026 – atual",
+                bullets: [
+                    "Desenvolvo e ajusto modelos baseados em Transformers e otimizo pipelines de inferência: latência 25% menor e menos consumo computacional em produção.",
+                    "Empacoto e automatizo o deploy de serviços com Docker e VMs em Linux, com CI/CD no Azure DevOps, revisão de código, versionamento de modelos com MLflow e controle de acesso.",
+                ],
+                stack: ["Python", "PyTorch", "Hugging Face", "spaCy", "NLTK", "FastAPI", "Docker", "MLflow", "Azure DevOps", "scikit-learn", "Pytest"],
             },
             {
-                label: "Website",
-                type: "external",
-                url: "https://belforzphotography.vercel.app"
-            }
-        ],
-        imageLink: "images/Photographies.png",
-        alignLeft: false,
-        isImportant: false
-    },
-    {
-        projectName: "R&M Administração",
-        yearCompleted: "2024",
-        description: "Com seus aspectos minimalistas, através de tecnologias como PHP, JS e CSS, uma atualização do site da empresa envolvendo práticas de UX design",
-        techStack: "#JavaScript, #CSS, #HTML & #PHP",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/rmadministracao"
+                title: "Engenheiro de Software Júnior · Engenharia de IA",
+                period: "01/2026 – 05/2026",
+                bullets: [
+                    "Construí e evoluí chatbots e agentes integrando plataformas de Call Center e sistemas legados a motores de NLP e IA generativa via APIs REST e webhooks: 5 milhões de interações por mês.",
+                    "Garanti 99% de disponibilidade com monitoramento contínuo, análise de logs, testes automatizados e pipelines de CI/CD.",
+                ],
+                stack: ["Python", "Node.js", "TypeScript", "FastAPI", "Bot Framework", "LLMs", "Docker", "RabbitMQ", "Prometheus", "Grafana", "MongoDB"],
             },
             {
-                label: "Website",
-                type: "external",
-                url: "https://remadministracao.com.br"
-            }
-        ],
-        imageLink: "images/r&m.png",
-        alignLeft: true,
-        isImportant: false
-    },
-    {
-        projectName: "BaixaCNPJ",
-        yearCompleted: "2024",
-        description: "Site de venda para a finalização de processos de CNPJ, diminuindo etapas com a utilização de UX design para atração de público.",
-        techStack: "#JavaScript, #CSS, #HTML & #PHP",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/baixaCNPJ"
-            }
-        ],
-        imageLink: "images/baixacnpj.png",
-        alignLeft: false,
-        isImportant: false
-    },
-    {
-        projectName: "LimpaNome",
-        yearCompleted: "2024",
-        description: "Uma interface mais atraente para a limpeza de nome, abreviando processos.",
-        techStack: "#PHP, #HTML, #CSS, #JS",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/LimpaNome"
-            }
-        ],
-        imageLink: "images/Zaion.png",
-        alignLeft: true,
-        isImportant: false
-    },
-    {
-        projectName: "Bom Vizinho",
-        yearCompleted: "2023",
-        description: "Um web aplicativo de serviços voluntários para idosos.",
-        techStack: "#HTML, #CSS, #JS, #Java, #PostgreSQL, #Vercel, #SwaggerUi",
-        links: [
-            {
-                label: "GitHub",
-                type: "git",
-                url: "https://github.com/belforz/voluntariado-site"
+                title: "Desenvolvedor (Estagiário) · IA Generativa",
+                period: "09/2024 – 12/2025",
+                bullets: [
+                    "Implementei e orquestrei LLMs com arquitetura RAG e engenharia de prompts para automação de atendimento em Call Center: tempo médio de atendimento 50% menor.",
+                    "Refatorei microsserviços de IA para baixa latência em produção (30 ms em média) e conectei regras de negócio e bases de dados aos motores de inferência.",
+                ],
+                stack: ["Python", "LangChain", "LlamaIndex", "LiteLLM", "OpenAI API", "Hugging Face", "FastAPI", "Docker", "MongoDB"],
             },
-            {
-                label: "Website",
-                type: "external",
-                url: "https://sistemas-bomvizinho.com.br"
-            }
         ],
-        imageLink: "images/BomVizinho.png",
-        alignLeft: false,
-        isImportant: true
+    },
+    {
+        company: "R&M Administração",
+        location: "São Paulo, SP · Híbrido",
+        period: "05/2024",
+        roles: [
+            {
+                title: "Desenvolvedor Freelancer",
+                period: "05/2024",
+                bullets: [
+                    "Site institucional em PHP, JavaScript e CSS a partir de layouts minimalistas definidos pelo design, entregue em 4 semanas com páginas carregando em menos de 2 s.",
+                ],
+                stack: ["PHP", "JavaScript", "CSS"],
+            },
+        ],
+    },
+    {
+        company: "Time Solutions Ltda",
+        location: "Atibaia, SP · Remoto",
+        period: "12/2023 – 03/2024",
+        roles: [
+            {
+                title: "Desenvolvedor Freelancer",
+                period: "12/2023 – 03/2024",
+                bullets: [
+                    "Planejei e estruturei landing pages para regularização de nome e cancelamento de CNPJ, com mascaramento de rotas e boas práticas de frontend.",
+                ],
+                stack: ["JavaScript", "HTML", "SCSS"],
+            },
+        ],
     },
 ];
 
+const skills: SkillGroup[] = [
+    { label: "Linguagens", items: ["Python", "Node.js", "TypeScript", "Go", "Java", "C++"] },
+    { label: "Frameworks e bibliotecas", items: ["uv", "scikit-learn", "PyTorch", "Hugging Face", "React", "Next.js", "Vue.js", "FastAPI", "OpenCV"] },
+    { label: "Inteligência artificial", items: ["IA generativa", "Engenharia de prompt", "Machine learning", "RAG", "LLMs", "NLP"] },
+    { label: "Dados e BI", items: ["PostgreSQL", "MySQL", "SQL Server", "MongoDB", "Power BI"] },
+    { label: "APIs e versionamento", items: ["APIs REST", "Git", "GitHub", "GitHub Copilot"] },
+    { label: "Infra e DevOps", items: ["Docker", "GitHub Actions", "CI/CD", "Linux", "Kubernetes", "Azure DevOps", "AKS"] },
+];
 
-const archiveLink = "https://github.com/belforz?tab=repositories"
-
-// --- 📭 Contact Section ---
-
-const contact = {
-    externalLink: {
-        shortTitle: "Get in Touch",
-        note: [
-            "Atualmente no estágio dentro da Vivo(Telefônica Brasil)",
-            "Estou aberto para joint adventures e projetos em time. "
-        ], // paragraph breaks will be entered after each item,
-        link: {
-            email: "macedobeiramar@hotmail.com", // email takes precedance
-
+const photus: PhotusContent = {
+    title: "Photus",
+    context: "TCC na FATEC Ipiranga",
+    summary:
+        "Curadoria de fotografias assistida por IA. O usuário envia um lote de fotos e descreve em linguagem natural a estética que procura; o sistema categoriza a frase, mede a qualidade técnica de cada foto e devolve as três melhores. Cada etapa é um serviço independente.",
+    pipeline: ["Photus System", "Photus B", "Pré-processador", "Photus A", "Top 3"],
+    parts: [
+        {
+            name: "Photus System",
+            kind: "Front e orquestração",
+            description:
+                "Interface Gradio que orquestra o pipeline completo: envio das fotos e da frase, acompanhamento do lote, resultado e histórico.",
+            bullets: [
+                "Cadastro, login e perfil com sessão JWT no navegador.",
+                "Monitor do lote, diagnóstico por foto, Top 3, histórico e exclusão.",
+                "Consome Photus B e Photus UC por HTTP.",
+            ],
+            stack: ["Python", "Gradio", "uv", "Docker"],
+            links: [{ label: "GitHub", url: `${gh}/photus-system` }],
         },
-        responseTimeMessage: "... e eu vou lhe responder em 24 horas"
+        {
+            name: "Photus UC",
+            kind: "Backend de casos de uso",
+            description:
+                "API que concentra as regras de negócio: contas de usuário, lotes de avaliação, execução do pipeline em segundo plano e seleção do Top 3.",
+            bullets: [
+                "Arquitetura hexagonal: domínio, casos de uso, portas e adaptadores.",
+                "Auth com bcrypt e JWT; migrações com Alembic; Postgres em Docker.",
+                "Pipeline plugável: binários locais ou serviço HTTP (Photus Engine). Mais de 100 testes automatizados.",
+            ],
+            stack: ["Python", "FastAPI", "SQLAlchemy", "Alembic", "PostgreSQL", "Pytest", "Docker"],
+            links: [{ label: "GitHub", url: `${gh}/photus-uc` }],
+        },
+        {
+            name: "Photus A",
+            kind: "Avaliação de qualidade de imagem",
+            description:
+                "Modelo de avaliação técnica em C++17 e OpenCV: extrai métricas de cada foto e decide com Random Forest e regras de fronteira.",
+            bullets: [
+                "Nitidez, exposição, densidade de bordas, contraste, saturação e detecção de face (YuNet).",
+                "Thresholds calibrados por âncora estética, com fallback global.",
+                "Saída em JSON: status (Aprovado, Reprovado, Indefinido, Revisão humana), score e métricas.",
+            ],
+            stack: ["C++17", "OpenCV", "Random Forest", "CMake", "nlohmann/json"],
+            links: [{ label: "GitHub", url: `${gh}/photus-a` }],
+        },
+        {
+            name: "Photus B",
+            kind: "API de linguagem",
+            description:
+                "Transformer adaptado à estética computacional: traduz a frase do usuário para a âncora semântica mais próxima.",
+            bullets: [
+                "Embeddings multilíngues (Sentence Transformers) comparados a um grafo de âncoras de conhecimento.",
+                "Fallback para LLM somente quando a classificação não é confiável.",
+                "POST /v1/categorize; modelo carregado uma única vez na inicialização.",
+            ],
+            stack: ["Python", "PyTorch", "Sentence Transformers", "FastAPI", "uv", "Docker"],
+            links: [{ label: "GitHub", url: `${gh}/photus-b` }],
+            image: "assets/photus-b-anchors.png",
+            imageCaption: "Photus B · matriz de colisão das âncoras semânticas",
+        },
+        {
+            name: "Pré-processador",
+            kind: "Preparação de imagens",
+            description:
+                "Ferramenta em C++ que valida e prepara as fotos antes da avaliação, e também gera datasets para treino.",
+            bullets: [
+                "Validação de integridade e formato, correção de orientação EXIF, redimensionamento e compressão.",
+                "Miniaturas, conversão de espaço de cor (cinza, HSV) e normalização.",
+                "Metadados com hash SHA-256 e relatório em JSON.",
+            ],
+            stack: ["C++17", "OpenCV", "OpenSSL", "CMake"],
+            links: [{ label: "GitHub", url: `${gh}/ai-pre-process-images` }],
+        },
+        {
+            name: "Photus Engine",
+            kind: "Serviço de execução",
+            description:
+                "Empacota Pré-processador e Photus A numa única imagem Docker e os expõe por HTTP, para o Photus UC chamar sem depender de binários locais.",
+            bullets: [
+                "POST /v1/evaluate recebe o lote e devolve status, score e métricas por foto.",
+                "Build multi-stage em Release; scores idênticos aos do binário local.",
+            ],
+            stack: ["Python", "FastAPI", "Docker", "C++17"],
+            links: [{ label: "GitHub", url: `${gh}/photus-engine` }],
+        },
+    ],
+};
+
+const research: ProjectItem = {
+    name: "Pesquisa em NLP",
+    year: "FATEC Ipiranga",
+    description:
+        "Experimentos sobre confusão semântica em grandes modelos de linguagem, sob orientação do Prof. Dr. Manoel Aranha.",
+    stack: ["Python", "NLP"],
+    links: [],
+};
+
+const works: ProjectItem[] = [
+    research,
+    {
+        name: "Mini Leandro",
+        year: "2025",
+        description:
+            "Agente conversacional com IA generativa que responde sobre mim, com intenções via NLP. É o chat deste site.",
+        stack: ["Python", "Vue.js", "Redis", "MongoDB"],
+        links: [{ label: "GitHub", url: `${gh}/mini-leandro-back-end` }],
+        image: "assets/noovo.png",
+        imageCaption: "Mini Leandro",
     },
-    formEmbedLink: "" // inclusion of this link will take precedance
-}
+    {
+        name: "NLP Classification Module",
+        year: "2025",
+        description:
+            "Módulo de NLP com análise de tendências, extração de entidades nomeadas, classificação de texto e pontuação por matrizes de risco.",
+        stack: ["Sentence Transformers", "spaCy", "NLTK", "Hugging Face"],
+        links: [{ label: "GitHub", url: `${gh}/classification-nlp` }],
+        image: "assets/NLP.jpg",
+        imageCaption: "NLP Classification Module",
+    },
+    {
+        name: "NLP Semantics Module",
+        year: "2025",
+        description:
+            "Pré-pesquisa de uma futura iniciação científica: similaridade semântica e agrupamento de textos com modelos de linguagem.",
+        stack: ["Sentence Transformers", "NumPy", "Hugging Face", "Similaridade de cosseno"],
+        links: [{ label: "GitHub", url: `${gh}/classification-nlp` }],
+        image: "assets/image2.png",
+        imageCaption: "NLP Semantics Module",
+    },
+    {
+        name: "Loja de Vinis",
+        year: "2025",
+        description: "E-commerce de discos de vinil, com interface minimalista e responsiva.",
+        stack: ["React", "TypeScript", "Java", "MongoDB"],
+        links: [
+            { label: "GitHub", url: `${gh}/v-disk-interface` },
+            { label: "Site", url: "https://v-disk-interface.vercel.app/" },
+        ],
+        image: "assets/v-disk.png",
+        imageCaption: "Loja de Vinis",
+    },
+    {
+        name: "MusicSom",
+        year: "2025",
+        description:
+            "Recomendação musical por características técnicas dos álbuns (instrumentos, BPM, vocais, atmosfera), sem depender de gênero ou artista.",
+        stack: ["SQL", "BrModelo"],
+        links: [{ label: "GitHub", url: `${gh}/projeto-musicsomj` }],
+        image: "assets/musicsom.png",
+        imageCaption: "MusicSom",
+    },
+    {
+        name: "Buscador de imagens da NASA",
+        year: "2025",
+        description: "App React Native que busca imagens na API pública da NASA.",
+        stack: ["React Native", "Node.js", "NASA API"],
+        links: [{ label: "GitHub", url: `${gh}/prova_pdmn_oficial` }],
+        image: "assets/horrivel.png",
+        imageCaption: "Buscador de imagens da NASA",
+    },
+    {
+        name: "Mini Photoshop",
+        year: "2025",
+        description: "Editor de imagens leve em C, com recorte, redimensionamento e ajuste de cores.",
+        stack: ["C", "GTK"],
+        links: [{ label: "GitHub", url: `${gh}/mini-photoshop-app` }],
+        image: "assets/photoshopC.png",
+        imageCaption: "Mini Photoshop",
+    },
+    {
+        name: "Loja de Adoção de Pets",
+        year: "2025",
+        description: "Plataforma que conecta abrigos e adotantes de animais.",
+        stack: ["Java", "Python", "Tkinter", "MySQL"],
+        links: [{ label: "GitHub", url: `${gh}/doacao_animal_app` }],
+        image: "assets/pets.jpg",
+        imageCaption: "Loja de Adoção de Pets",
+    },
+    {
+        name: "Fotografias",
+        year: "2024",
+        description: "Portfólio fotográfico pessoal.",
+        stack: ["Vue.js", "Tailwind CSS"],
+        links: [
+            { label: "GitHub", url: `${gh}/portfoliophotos` },
+            { label: "Site", url: "https://belforzphotography.vercel.app" },
+        ],
+        image: "assets/Photographies.png",
+        imageCaption: "Fotografias",
+    },
+    {
+        name: "R&M Administração",
+        year: "2024",
+        description: "Site institucional da empresa, com foco em UX.",
+        stack: ["PHP", "JavaScript", "CSS"],
+        links: [
+            { label: "GitHub", url: `${gh}/rmadministracao` },
+            { label: "Site", url: "https://remadministracao.com.br" },
+        ],
+        image: "assets/r&m.png",
+        imageCaption: "R&M Administração",
+    },
+    {
+        name: "BaixaCNPJ",
+        year: "2024",
+        description: "Site de venda para finalização de processos de CNPJ, com menos etapas.",
+        stack: ["PHP", "JavaScript", "CSS"],
+        links: [{ label: "GitHub", url: `${gh}/baixaCNPJ` }],
+        image: "assets/baixacnpj.png",
+        imageCaption: "BaixaCNPJ",
+    },
+    {
+        name: "LimpaNome",
+        year: "2024",
+        description: "Interface mais direta para regularização de nome.",
+        stack: ["PHP", "JavaScript", "CSS"],
+        links: [{ label: "GitHub", url: `${gh}/LimpaNome` }],
+        image: "assets/Zaion.png",
+        imageCaption: "LimpaNome",
+    },
+    {
+        name: "Obranet",
+        year: "2024",
+        description: "Gestão de clientes, funcionários e obras em Excel, com cadastro, edição, busca e exclusão.",
+        stack: ["Excel", "VBA"],
+        links: [{ label: "GitHub", url: `${gh}/projeto-final-pmi` }],
+        image: "assets/obranet.png",
+        imageCaption: "Obranet",
+    },
+    {
+        name: "Bom Vizinho",
+        year: "2023",
+        description: "Aplicação web de serviços voluntários para idosos.",
+        stack: ["Java", "PostgreSQL", "JavaScript", "Swagger"],
+        links: [
+            { label: "GitHub", url: `${gh}/voluntariado-site` },
+            { label: "Site", url: "https://sistemas-bomvizinho.com.br" },
+        ],
+        image: "assets/BomVizinho.png",
+        imageCaption: "Bom Vizinho",
+    },
+];
+
+const education: EducationItem[] = [
+    {
+        title: "Tecnologia em Análise e Desenvolvimento de Sistemas",
+        place: "FATEC Ipiranga · São Paulo, SP",
+        period: "2024 – previsão 2027",
+    },
+    {
+        title: "Técnico em Desenvolvimento de Sistemas",
+        place: "ETEC (Centro Paula Souza) · São Paulo, SP",
+        period: "2022 – 2023",
+    },
+];
+
+const certifications: CertificationItem[] = [
+    { title: "Stanford CME295: Transformers & LLMs", detail: "Curso online · 12 h", year: "2026" },
+    { title: "As Linguagens de NLP", detail: "Curso online · 40 h", year: "2025" },
+    { title: "SQL Language", detail: "Curso online · 72 h", year: "2023" },
+];
+
+const extras =
+    "Voluntário na AISEC Brasil (Belém, PA), 2018: apoio a intercambistas em projetos sociais de educação para comunidades vulneráveis.";
+
+const contact: ContactContent = {
+    note: "Aberto a conversas sobre Machine Learning, NLP, Visao Computacional e IA Genrativa e projetos em time.",
+    email: "macedobeiramar@hotmail.com",
+    responseTime: "Respondo em até 24 horas.",
+    links: [
+        { label: "GitHub", url: socialMediaLinks.github },
+        { label: "LinkedIn", url: socialMediaLinks.linkedin },
+        { label: "Fotografia", url: socialMediaLinks.photography },
+    ],
+};
 
 export default {
-    colors,
-    transitions,
-    splashScreen,
     greeting,
     socialMediaLinks,
     about,
     experiences,
+    skills,
+    photus,
     works,
-    archiveLink,
-    contact, skills, iconsImages
-
-}
+    education,
+    certifications,
+    extras,
+    contact,
+    archiveLink: `${gh}?tab=repositories`,
+};
